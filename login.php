@@ -60,7 +60,7 @@ if (isset($_POST['register'])) {
     $prenom = htmlspecialchars($_POST['prenom']);
 
     //  Vérification des champs
-    if (empty($email) || empty($_POST['mot_de_passe_reg'])) {
+    if (empty($email) || empty($_POST['mot_de_passe_reg']) || empty($nom) || empty($prenom)) {
         $error = "Veuillez remplir tous les champs";
     } else {
         //  ATTENTION : utilisateurs (avec S)
@@ -68,7 +68,22 @@ if (isset($_POST['register'])) {
         $stmt->bind_param("sssss", $email, $mot_de_passe, $role, $nom, $prenom);
 
         if ($stmt->execute()) {
-            $success = "Compte créé avec succès.";
+            // Connexion automatique et redirection
+            $stmt_login = $conn->prepare("SELECT id, role, nom, prenom FROM utilisateurs WHERE email = ?");
+            $stmt_login->bind_param("s", $email);
+            $stmt_login->execute();
+            $result_login = $stmt_login->get_result();
+            $user = $result_login->fetch_assoc();
+            
+            $_SESSION['user_id'] = $user['id'];
+            $_SESSION['role'] = $user['role'];
+            $_SESSION['nom'] = $user['nom'];
+            $_SESSION['prenom'] = $user['prenom'];
+            
+            $stmt_login->close();
+            
+            header("Location: patient.php");
+            exit();
         } else {
             $error = "Email déjà utilisé.";
         }
@@ -108,38 +123,58 @@ $conn->close();
             <span>ou</span>
         </div>
 
-        <div class="tabs">
-            <button class="tab-button active" onclick="showTab('login', event)">Connexion</button>
-            <button class="tab-button" onclick="showTab('register', event)">Créer un compte</button>
-        </div>
-
-        <form id="login" class="tab active" method="post">
+        <form id="login" method="post">
             <input type="email" name="email" placeholder="Email" required>
             <input type="password" name="mot_de_passe" placeholder="Mot de passe" required>
             <button type="submit" name="login">Se connecter</button>
         </form>
 
-        <form id="register" class="tab" method="post">
-            <input type="text" name="nom" placeholder="Nom" required>
-            <input type="text" name="prenom" placeholder="Prénom" required>
-            <input type="email" name="email_reg" placeholder="Email" required>
-            <input type="password" name="mot_de_passe_reg" placeholder="Mot de passe" required>
-            <input type="hidden" name="role" value="patient">
-            <button type="submit" name="register">Créer un compte</button>
-        </form>
+        <p style="margin-top: 20px; text-align: center;">
+            Pas encore de compte ? 
+            <button type="button" class="link-button" onclick="openRegisterModal()">Créer un compte</button>
+        </p>
+    </div>
+
+    <!-- Modal d'inscription -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeRegisterModal()">&times;</span>
+            <h2>Créer un nouveau compte</h2>
+            
+            <form id="register" method="post">
+                <label for="nom">Nom</label>
+                <input type="text" id="nom" name="nom" placeholder="Votre nom" required>
+                
+                <label for="prenom">Prénom</label>
+                <input type="text" id="prenom" name="prenom" placeholder="Votre prénom" required>
+                
+                <label for="email_reg">Email</label>
+                <input type="email" id="email_reg" name="email_reg" placeholder="Votre email" required>
+                
+                <label for="password_reg">Mot de passe</label>
+                <input type="password" id="password_reg" name="mot_de_passe_reg" placeholder="Entrez un mot de passe sécurisé" required>
+                
+                <input type="hidden" name="role" value="patient">
+                <button type="submit" name="register">Créer mon compte</button>
+            </form>
+        </div>
     </div>
 
     <script>
-        function showTab(tabName, event) {
-        const tabs = document.querySelectorAll('.tab');
-        const buttons = document.querySelectorAll('.tab-button');
+        function openRegisterModal() {
+            document.getElementById('registerModal').style.display = 'block';
+        }
 
-        tabs.forEach(tab => tab.classList.remove('active'));
-        buttons.forEach(button => button.classList.remove('active'));
+        function closeRegisterModal() {
+            document.getElementById('registerModal').style.display = 'none';
+        }
 
-        document.getElementById(tabName).classList.add('active');
-        event.currentTarget.classList.add('active');
-    }
+        window.onclick = function(event) {
+            const modal = document.getElementById('registerModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
 
         function handleGoogleSignIn(response) {
             // Send the JWT token to the server for verification
