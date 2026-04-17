@@ -86,27 +86,8 @@ $conn->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Connexion - Hôpital Medicare</title>
+    <link rel="stylesheet" href="/style.css">
     <script src="https://accounts.google.com/gsi/client" async defer></script>
-    <style>
-        body { font-family: Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 0; }
-        .container { max-width: 400px; margin: 50px auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-        h1 { text-align: center; color: #333; }
-        form { display: flex; flex-direction: column; }
-        input, select { margin-bottom: 10px; padding: 10px; border: 1px solid #ddd; border-radius: 4px; }
-        button { padding: 10px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer; }
-        button:hover { background-color: #45a049; }
-        .error { color: red; text-align: center; }
-        .success { color: green; text-align: center; }
-        .tab { display: none; }
-        .tab.active { display: block; }
-        .tabs { text-align: center; margin-bottom: 20px; }
-        .tab-button { background: none; border: none; padding: 10px 20px; cursor: pointer; border-bottom: 2px solid transparent; }
-        .tab-button.active { border-bottom: 2px solid #4CAF50; }
-        .google-login { text-align: center; margin-bottom: 20px; }
-        .or-divider { text-align: center; margin: 20px 0; position: relative; }
-        .or-divider::before { content: ''; position: absolute; top: 50%; left: 0; right: 0; height: 1px; background: #ddd; }
-        .or-divider span { background: white; padding: 0 10px; color: #666; }
-    </style>
 </head>
 <body>
     <div class="container">
