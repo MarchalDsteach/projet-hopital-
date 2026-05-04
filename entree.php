@@ -43,7 +43,7 @@
                         <span>Professionnels de santé</span>
                     </div>
                     <div>
-                        <strong>Plus de 50</strong>
+                        <strong>50+</strong>
                         <span>spécialités médicales</span>
                     </div>
                 </div>
