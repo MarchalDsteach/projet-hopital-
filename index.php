@@ -60,8 +60,4 @@ if ($conn->query($alter_google_sql) === TRUE) {
 
 // Fermer la connexion
 $conn->close();
-
-// Redirection vers la page d'entrée
-header("Location: entree.php");
-exit();
 ?>
