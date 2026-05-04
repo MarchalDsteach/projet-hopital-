@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hôpital Medicare</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -69,18 +73,30 @@
             </div>
             <div class="service-grid">
                 <article class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-heartbeat"></i>
+                    </div>
                     <h3>Cardiologie</h3>
                     <p>Suivi personnalisé pour votre cœur avec des spécialistes expérimentés.</p>
                 </article>
                 <article class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-baby"></i>
+                    </div>
                     <h3>Maternité</h3>
                     <p>Accompagnement complet avant, pendant et après la naissance.</p>
                 </article>
                 <article class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-x-ray"></i>
+                    </div>
                     <h3>Imagerie</h3>
                     <p>Examens rapides avec des équipements de pointe.</p>
                 </article>
                 <article class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-stethoscope"></i>
+                    </div>
                     <h3>Consultations</h3>
                     <p>Des rendez-vous en ligne avec vos médecins et spécialistes.</p>
                 </article>
