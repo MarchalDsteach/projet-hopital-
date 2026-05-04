@@ -966,45 +966,90 @@ button:active {
     color: #0b2e50;
 }
 
-.service-grid {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 22px;
+.service-tabs {
     margin-top: 28px;
 }
 
-.service-card {
-    padding: 40px 32px;
+.tab-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+}
+
+.tab-button {
+    padding: 12px 24px;
+    background: #f8fbff;
+    border: 1px solid rgba(13, 59, 102, 0.16);
+    border-radius: 999px;
+    color: #0d3b66;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.tab-button:hover,
+.tab-button.active {
+    background: #3498db;
+    color: white;
+    box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+}
+
+.tab-content {
     background: #ffffff;
     border-radius: 24px;
     box-shadow: 0 18px 44px rgba(16, 36, 59, 0.1);
     border: 1px solid rgba(13, 59, 102, 0.06);
+    overflow: hidden;
+}
+
+.tab-pane {
+    display: none;
+    padding: 40px;
     text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.service-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 24px 60px rgba(16, 36, 59, 0.15);
+.tab-pane.active {
+    display: block;
 }
 
-.service-icon {
-    font-size: 3rem;
+.service-detail .service-icon {
+    font-size: 4rem;
     color: #3498db;
+    margin-bottom: 20px;
+}
+
+.service-detail h3 {
     margin-bottom: 16px;
-}
-
-.service-card h3 {
-    margin-top: 0;
-    margin-bottom: 14px;
     color: #0d3b66;
-    font-size: 1.25rem;
+    font-size: 1.5rem;
 }
 
-.service-card p {
-    margin: 0;
+.service-detail p {
+    margin-bottom: 20px;
     color: #4e6d8b;
-    line-height: 1.75;
+    line-height: 1.7;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.service-detail ul {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+    margin-top: 24px;
+}
+
+.service-detail li {
+    padding: 12px 16px;
+    background: #f8fbff;
+    border-radius: 12px;
+    color: #0d3b66;
+    font-weight: 500;
 }
 
 .info-section {
@@ -1068,15 +1113,103 @@ button:active {
     font-weight: 700;
 }
 
-@media (max-width: 1080px) {
-    .hero-section {
-        grid-template-columns: 1fr;
-    }
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    animation: fadeIn 0.3s ease;
+}
 
-    .service-grid,
-    .info-section {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
+.modal-content {
+    background-color: #fff;
+    margin: 5% auto;
+    padding: 32px;
+    border-radius: 24px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideIn {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: #000;
+}
+
+.modal h2 {
+    margin-bottom: 24px;
+    color: #0d3b66;
+    text-align: center;
+}
+
+.modal form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.modal label {
+    font-weight: 600;
+    color: #0d3b66;
+    margin-bottom: 4px;
+}
+
+.modal input,
+.modal select,
+.modal textarea {
+    padding: 12px 16px;
+    border: 1px solid rgba(13, 59, 102, 0.16);
+    border-radius: 12px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.modal input:focus,
+.modal select:focus,
+.modal textarea:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+.modal button[type="submit"] {
+    padding: 14px 24px;
+    background: linear-gradient(135deg, #3498db 0%, #2e86c1 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-top: 16px;
+}
+
+.modal button[type="submit"]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(52, 152, 219, 0.3);
 }
 
 @media (max-width: 760px) {
@@ -1109,6 +1242,20 @@ button:active {
     .hospital-footer {
         flex-direction: column;
         align-items: stretch;
+    }
+
+    .tab-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .service-detail ul {
+        grid-template-columns: 1fr;
+    }
+
+    .modal-content {
+        margin: 10% auto;
+        padding: 24px;
     }
 }
 
