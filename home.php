@@ -4,39 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Accueil - Hôpital Medicare</title>
-    <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="home.css">
 </head>
 <body>
-  <h2 class="sr-only">Plateforme hospitalière — Hôpital Foch</h2>
+    <div class="container">
+        <h1>Bienvenue à l'Hôpital Medicare</h1>
+        <p>Votre santé est notre priorité. Nous sommes là pour vous offrir un service médical de qualité et un accompagnement humain.</p>
 
-<nav>
-  <div class="nav-logo">
-    <div class="logo-mark">
-      <svg viewBox="0 0 24 24">
-        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/>
-      </svg>
+        <div class="home-actions">
+            <button onclick="window.location.href='login.php'">Se connecter</button>
+            <button onclick="window.location.href='contact.php'">Contactez-nous</button>
+        </div>
+
+        <section class="home-features">
+            <h2>Nos services</h2>
+            <ul>
+                <li>Consultations médicales</li>
+                <li>Prise de rendez-vous rapide</li>
+                <li>Accueil et orientation des patients</li>
+                <li>Support administratif</li>
+            </ul>
+        </section>
+
+        <section class="home-info">
+            <h2>Accès rapide</h2>
+            <p>Si vous êtes membre du personnel, utilisez votre espace dédié pour gérer les rendez-vous et les dossiers patients.</p>
+        </section>
     </div>
-
-    <div class="logo-text">
-      <span>Hôpital Foch</span>
-      <span>Suresnes · CHU référent</span>
-    </div>
-  </div>
-
-  <div class="nav-links">
-    <a href="#" class="active">Accueil</a>
-    <a href="#">Spécialités</a>
-    <a href="#">Prendre RDV</a>
-    <a href="#">Hospitalisation</a>
-    <a href="#">Recherche</a>
-  </div>
-
-  <div class="nav-cta">
-    <button class="btn-outline">Espace patient</button>
-    <button class="btn-primary">Urgences</button>
-  </div>
-</nav>
+</body>
+</html>
 
 
 <section class="hero">
@@ -110,6 +107,6 @@
 
   </div>
 
-</section>
+</section
 </body>
 </html>
