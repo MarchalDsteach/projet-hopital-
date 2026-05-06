@@ -1,114 +1,238 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Accueil - Hôpital Medicare</title>
-    <link rel="stylesheet" href="home.css">
+  <meta charset="UTF-8">
+  <title>Plateforme hospitalière — Hôpital Medicare</title>
+  <link rel="stylesheet" href="home.css">
 </head>
 <body>
-   <h2 class="sr-only">Plateforme hospitalière — Hôpital Medicare</h2>
+  <header class="header">
+    <div class="logo">Hôpital Medicare</div>
+    <nav class="main-nav">
+      <a href="#">Accueil</a>
+      <a href="#">Spécialités</a>
+      <a href="#">Prendre RDV</a>
+      <a href="#">Hospitalisation</a>
+      <a href="#">Recherche</a>
+      <a href="#">L'hôpital</a>
+      <a href="#">Espace patient</a>
+      <a href="#">Urgences</a>
+    </nav>
+    <div class="badge">Établissement privé d'intérêt collectif</div>
+  </header>
 
-<nav>
-  <div class="nav-logo">
-    <div class="logo-mark">
-      <svg viewBox="0 0 24 24">
-        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/>
-      </svg>
-    </div>
-
-    <div class="logo-text">
-      <span>Hôpital Medicare</span>
-      <span>Suresnes · CHU référent</span>
-    </div>
-  </div>
-
-  <div class="nav-links">
-    <a href="#" class="active">Accueil</a>
-    <a href="#">Spécialités</a>
-    <a href="#">Prendre RDV</a>
-    <a href="#">Hospitalisation</a>
-    <a href="#">Recherche</a>
-  </div>
-
-  <div class="nav-cta">
-    <button class="btn-outline">Espace patient</button>
-    <button class="btn-primary">Urgences</button>
-  </div>
-</nav>
-
-
-<section class="hero">
-
-  <div class="hero-left">
-    <div class="hero-badge">
-      Établissement privé d'intérêt collectif
-    </div>
-
-    <h1 class="hero-title">
-      Des soins d'excellence à votre service
-    </h1>
-
-    <p class="hero-sub">
-      L'Hôpital Medicare vous accompagne dans chaque étape de votre parcours de soin.
+  <section class="hero">
+    <h1>Des soins d'excellence à votre service</h1>
+    <p>
+      L'Hôpital Medicare, centre de référence en Île-de-France, vous accompagne dans chaque étape de votre
+      parcours de soin, de la consultation à la chirurgie de pointe.
     </p>
-
     <div class="hero-actions">
-      <button class="btn-white">Prendre rendez-vous</button>
-      <button class="btn-ghost">Découvrir</button>
+      <a href="#" class="btn primary">Prendre rendez-vous</a>
+      <a href="#" class="btn secondary">Découvrir nos services</a>
     </div>
-
-    <div class="hero-stats">
-      <div class="hero-stat">
-        <span>950</span>
-        <span>Lits</span>
+    <div class="stats">
+      <div class="stat">
+        <span class="stat-number">950</span>
+        <span class="stat-label">Lits et places</span>
       </div>
-
-      <div class="hero-stat">
-        <span>45+</span>
-        <span>Spécialités</span>
+      <div class="stat">
+        <span class="stat-number">45+</span>
+        <span class="stat-label">Spécialités médicales</span>
       </div>
-
-      <div class="hero-stat">
-        <span>3200</span>
-        <span>Professionnels</span>
+      <div class="stat">
+        <span class="stat-number">3 200</span>
+        <span class="stat-label">Professionnels de santé</span>
       </div>
     </div>
-  </div>
+  </section>
 
-
-  <div class="hero-right">
-
-    <h3 class="hero-right-title">
-      Prendre rendez-vous
-    </h3>
-
-    <div class="search-card">
-
-      <div class="search-tabs">
-        <button class="stab active">Consultation</button>
-        <button class="stab">Urgences</button>
-        <button class="stab">Examen</button>
-      </div>
-
-      <div class="search-body">
-
-        <label class="field-label">
-          Spécialité
-        </label>
-
-        <input class="field-input" type="text">
-
-        <button class="btn-search">
-          Rechercher
-        </button>
-
-      </div>
-
+  <section class="rdv">
+    <h2>Prendre rendez-vous</h2>
+    <div class="rdv-types">
+      <button class="tab active">Consultation</button>
+      <button class="tab">Urgences</button>
+      <button class="tab">Examen</button>
     </div>
+    <div class="rdv-urgences">
+      <span class="badge-urgences">Urgences ouvertes 24h/24</span>
+      <span class="urgences-phone">Tél. 01 46 25 20 00</span>
+    </div>
+    <form class="rdv-form">
+      <div class="form-group">
+        <label>Spécialité ou médecin</label>
+        <input type="text" placeholder="Ex : Cardiologie, Dr Dupont">
+      </div>
+      <div class="form-group">
+        <label>Date souhaitée</label>
+        <input type="text" placeholder="jj / mm / aaaa">
+      </div>
+      <div class="form-group">
+        <label>Type de consultation</label>
+        <select>
+          <option>Première consultation</option>
+          <option>Suivi</option>
+        </select>
+      </div>
+      <button type="submit" class="btn primary">Rechercher un créneau</button>
+    </form>
+    <div class="teleconsultation">
+      <strong>🖥 Téléconsultation</strong>
+      <p>Consultation vidéo sous 24h</p>
+    </div>
+  </section>
 
-  </div>
+  <section class="expertises">
+    <h2>Expertises médicales</h2>
+    <p class="subtitle">Nos spécialités</p>
+    <div class="cards">
+      <article class="card">
+        <h3>🫀 Cardiologie</h3>
+        <p>Centre de référence en chirurgie cardiaque et rythmologie interventionnelle</p>
+        <a href="#" class="link">Prendre RDV →</a>
+      </article>
+      <article class="card">
+        <h3>🫁 Pneumologie</h3>
+        <p>Traitement des maladies respiratoires, unité de transplantation pulmonaire</p>
+        <a href="#" class="link">Prendre RDV →</a>
+      </article>
+      <article class="card">
+        <h3>🧠 Neurologie</h3>
+        <p>Prise en charge des AVC, épilepsie et maladies neurodégénératives</p>
+        <a href="#" class="link">Prendre RDV →</a>
+      </article>
+      <article class="card">
+        <h3>🦷 Cancérologie</h3>
+        <p>Unité d'oncologie intégrative et essais cliniques de phase III</p>
+        <a href="#" class="link">Prendre RDV →</a>
+      </article>
+      <article class="card">
+        <h3>🦴 Orthopédie</h3>
+        <p>Chirurgie prothétique, arthroscopie, rééducation fonctionnelle</p>
+        <a href="#" class="link">Prendre RDV →</a>
+      </article>
+      <article class="card">
+        <h3>👁 Ophtalmologie</h3>
+        <p>Chirurgie réfractive au laser, glaucome, chirurgie de la cataracte</p>
+        <a href="#" class="link">Prendre RDV →</a>
+      </article>
+      <article class="card">
+        <h3>🍼 Maternité</h3>
+        <p>Maternité niveau III, néonatologie et suivi périnatal personnalisé</p>
+        <a href="#" class="link">Prendre RDV →</a>
+      </article>
+    </div>
+    <div class="more-specialties">
+      <span>+ 45 spécialités</span>
+      <a href="#" class="link">Explorez l'ensemble de nos pôles médicaux et chirurgicaux →</a>
+    </div>
+  </section>
 
-</section>
+  <section class="news">
+    <h2>Actualités</h2>
+    <p class="subtitle">Vie de l'hôpital</p>
+    <div class="news-list">
+      <article class="news-item">
+        <span class="tag innovation">Innovation</span>
+        <h3>Premier robot chirurgical Da Vinci XI installé au bloc opératoire</h3>
+        <p>Une avancée majeure pour la chirurgie mini-invasive au sein de l'hôpital Foch, permettant une précision accrue et une récupération plus rapide pour les patients.</p>
+        <span class="date">12 avril 2026</span>
+      </article>
+      <article class="news-item">
+        <span class="tag recherche">Recherche</span>
+        <h3>Résultats prometteurs dans l'essai clinique sur la BPCO sévère</h3>
+        <span class="date">5 avril 2026</span>
+      </article>
+      <article class="news-item">
+        <span class="tag communique">Communiqué</span>
+        <h3>Nouveau centre de transplantation hépatique — ouverture en mai</h3>
+        <span class="date">28 mars 2026</span>
+      </article>
+      <article class="news-item">
+        <span class="tag formation">Formation</span>
+        <h3>L'hôpital Medicare accueille la 3ᵉ promotion de son Institut de formation infirmier</h3>
+        <span class="date">20 mars 2026</span>
+      </article>
+    </div>
+  </section>
+
+  <section class="espace-patient">
+    <h2>Votre espace patient en ligne</h2>
+    <p>
+      Gérez vos rendez-vous, accédez à vos résultats d'examens et communiquez avec votre équipe médicale
+      depuis un espace sécurisé.
+    </p>
+    <ul class="features">
+      <li>Résultats d'analyses en temps réel</li>
+      <li>Ordonnances et comptes-rendus médicaux</li>
+      <li>Messagerie sécurisée avec vos praticiens</li>
+      <li>Facturation et remboursements</li>
+    </ul>
+    <a href="#" class="btn primary">Créer mon espace patient</a>
+
+    <div class="espace-grid">
+      <div class="espace-card">
+        <h3>📅 Mes rendez-vous</h3>
+        <p>Consulter, modifier ou annuler vos prochains RDV</p>
+      </div>
+      <div class="espace-card">
+        <h3>🧾 Mes résultats</h3>
+        <p>Bilans, imagerie et comptes-rendus en ligne</p>
+      </div>
+      <div class="espace-card">
+        <h3>💬 Messagerie</h3>
+        <p>Contacter votre équipe soignante en toute sécurité</p>
+      </div>
+      <div class="espace-card">
+        <h3>💊 Ordonnances</h3>
+        <p>Renouveler et télécharger vos prescriptions</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-main">
+      <div class="footer-block">
+        <h3>Hôpital Foch</h3>
+        <p>40 rue Worth, 92150 Suresnes</p>
+        <p>Tél. 01 46 25 20 00</p>
+        <p>FINESS : 920 018 072</p>
+      </div>
+      <div class="footer-block">
+        <h4>Patients</h4>
+        <ul>
+          <li><a href="#">Prendre RDV</a></li>
+          <li><a href="#">Espace patient</a></li>
+          <li><a href="#">Préparer mon séjour</a></li>
+          <li><a href="#">Droits des patients</a></li>
+          <li><a href="#">Contacts et accès</a></li>
+        </ul>
+      </div>
+      <div class="footer-block">
+        <h4>Soins</h4>
+        <ul>
+          <li><a href="#">Urgences</a></li>
+          <li><a href="#">Spécialités médicales</a></li>
+          <li><a href="#">Chirurgie</a></li>
+          <li><a href="#">Maternité</a></li>
+          <li><a href="#">Consultations externes</a></li>
+        </ul>
+      </div>
+      <div class="footer-block">
+        <h4>Hôpital</h4>
+        <ul>
+          <li><a href="#">Présentation</a></li>
+          <li><a href="#">Recherche clinique</a></li>
+          <li><a href="#">Enseignement</a></li>
+          <li><a href="#">Recrutement</a></li>
+          <li><a href="#">Presse</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Hôpital Foch — Établissement privé d'intérêt collectif</span>
+      <span>HAS Certifié · APHP Partenaire · ISO 27001</span>
+    </div>
+  </footer>
 </body>
 </html>

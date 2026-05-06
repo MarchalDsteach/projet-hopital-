@@ -1,675 +1,368 @@
-/* Importation des polices Google */
-@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap');
-
-
-/* Reset global */
-*{
-    box-sizing: border-box; /* padding inclus dans la largeur */
-    margin: 0;
-    padding: 0;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
-
-/* Variables globales */
-:root{
-
-    /* Couleurs principales */
-    --blue:#004B8D;
-    --blue-light:#E8F1FA;
-    --blue-mid:#2B7EC1;
-
-    --teal:#007A6E;
-    --teal-light:#E6F5F3;
-
-    --warm:#F7F4F0;
-    --border:#D8E4EE;
-
-    --text:#1A2332;
-    --muted:#5A6E85;
-
-    --accent:#C8102E;
-
-    --white:#FFFFFF;
-
-    /* Radius global */
-    --radius:10px;
+body {
+  background: #f5f7fb;
+  color: #1f2933;
+  line-height: 1.5;
 }
 
-
-/* Corps de page */
-body{
-    font-family:'DM Sans',sans-serif;
-    background:var(--warm);
-    color:var(--text);
-    min-height:100vh;
+a {
+  color: #0056b3;
+  text-decoration: none;
 }
 
-/* Screen reader only */
-.sr-only{
-    position:absolute;
-    left:-10000px;
-    top:auto;
-    width:1px;
-    height:1px;
-    overflow:hidden;
+a:hover {
+  text-decoration: underline;
 }
 
-
-/* =======================================================
-   NAVIGATION
-======================================================= */
-
-nav{
-    background:var(--white);
-    border-bottom:1px solid var(--border);
-
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-
-    padding:0 2rem;
-    height:68px;
-
-    position:sticky;
-    top:0;
-    z-index:100;
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 3rem;
+  background: #ffffff;
+  border-bottom: 1px solid #e1e4eb;
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
 
-
-/* Logo */
-.nav-logo{
-    display:flex;
-    align-items:center;
-    gap:12px;
+.logo {
+  font-weight: 700;
+  font-size: 1.2rem;
 }
 
-/* Icône du logo */
-.logo-mark{
-    width:42px;
-    height:42px;
-
-    background:var(--blue);
-    border-radius:8px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
+.main-nav a {
+  margin: 0 0.75rem;
+  font-size: 0.95rem;
 }
 
-/* Texte logo */
-.logo-text{
-    display:flex;
-    flex-direction:column;
-    line-height:1.1;
+.badge {
+  font-size: 0.8rem;
+  padding: 0.3rem 0.6rem;
+  border-radius: 999px;
+  background: #e6f0ff;
+  color: #0040a3;
 }
 
-
-/* Liens menu */
-.nav-links{
-    display:flex;
-    gap:2px;
+.hero {
+  padding: 3rem 3rem 2rem;
+  background: linear-gradient(135deg, #e6f0ff, #ffffff);
 }
 
-.nav-links a{
-
-    text-decoration:none;
-
-    color:var(--muted);
-    font-size:13px;
-
-    padding:6px 14px;
-    border-radius:6px;
-
-    transition:.15s;
+.hero h1 {
+  font-size: 2.2rem;
+  margin-bottom: 0.75rem;
 }
 
-/* Hover */
-.nav-links a:hover{
-    background:var(--blue-light);
-    color:var(--blue);
+.hero p {
+  max-width: 650px;
+  margin-bottom: 1.5rem;
 }
 
-/* Onglet actif */
-.nav-links a.active{
-    color:var(--blue);
-    font-weight:500;
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
 }
 
-
-/* Boutons de droite */
-.nav-cta{
-    display:flex;
-    align-items:center;
-    gap:8px;
+.btn {
+  display: inline-block;
+  padding: 0.7rem 1.4rem;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  border: none;
+  cursor: pointer;
 }
 
-
-/* Bouton contour */
-.btn-outline{
-
-    border:1px solid var(--blue);
-    background:transparent;
-    color:var(--blue);
-
-    padding:7px 16px;
-
-    border-radius:6px;
-
-    cursor:pointer;
+.btn.primary {
+  background: #0056b3;
+  color: #ffffff;
 }
 
-/* Bouton principal */
-.btn-primary{
-
-    background:var(--blue);
-    color:white;
-
-    border:none;
-
-    padding:8px 18px;
-
-    border-radius:6px;
-
-    cursor:pointer;
+.btn.secondary {
+  background: #ffffff;
+  color: #0056b3;
+  border: 1px solid #c5d3f0;
 }
 
-/* Bouton blanc */
-.btn-white{
-
-    background:white;
-    color:var(--blue);
-
-    border:1px solid var(--blue);
-
-    padding:8px 18px;
-
-    border-radius:6px;
-
-    cursor:pointer;
+.stats {
+  display: flex;
+  gap: 2rem;
+  margin-top: 1rem;
 }
 
-/* Bouton fantôme */
-.btn-ghost{
-
-    background:transparent;
-    color:var(--blue);
-
-    border:1px solid rgba(0,75,141,0.16);
-
-    padding:8px 18px;
-
-    border-radius:6px;
-
-    cursor:pointer;
+.stat-number {
+  font-size: 1.6rem;
+  font-weight: 700;
 }
 
-.btn-ghost:hover{
-    background:var(--blue-light);
+.stat-label {
+  display: block;
+  font-size: 0.9rem;
+  color: #4b5563;
 }
 
+/* Section RDV */
 
-/* =======================================================
-   HERO SECTION
-======================================================= */
-
-.hero{
-
-    display:grid;
-
-    /* 2 colonnes */
-    grid-template-columns:1fr 1fr;
-
-    min-height:520px;
-
-    overflow:hidden;
+.rdv {
+  padding: 2.5rem 3rem;
+  background: #ffffff;
 }
 
-
-/* Partie gauche */
-.hero-left{
-
-    background:var(--blue);
-
-    padding:3.5rem 3rem;
-
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-
-    position:relative;
+.rdv h2 {
+  margin-bottom: 1rem;
 }
 
-
-/* Badge */
-.hero-badge{
-
-    display:inline-flex;
-    align-items:center;
-    gap:6px;
-
-    width:fit-content;
-
-    padding:5px 12px;
-
-    border-radius:20px;
-
-    background:rgba(255,255,255,.12);
-
-    color:white;
+.rdv-types {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
 }
 
-
-/* Titre principal */
-.hero-title{
-
-    font-family:'Libre Baskerville',serif;
-
-    font-size:36px;
-    line-height:1.2;
-
-    color:white;
-
-    margin-bottom:1rem;
+.tab {
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  border: 1px solid #d1d5db;
+  background: #f9fafb;
+  cursor: pointer;
+  font-size: 0.9rem;
 }
 
-
-/* Sous texte */
-.hero-sub{
-
-    color:rgba(255,255,255,.7);
-
-    line-height:1.6;
-
-    max-width:380px;
-
-    margin-bottom:2rem;
+.tab.active {
+  background: #0056b3;
+  color: #ffffff;
+  border-color: #0056b3;
 }
 
-
-/* Titre droite hero */
-.hero-right-title{
-
-    font-size:18px;
-
-    font-weight:600;
-
-    color:var(--text);
-
-    margin-bottom:1rem;
+.rdv-urgences {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
 }
 
-
-/* Boutons */
-.hero-actions{
-    display:flex;
-    gap:10px;
+.badge-urgences {
+  background: #fee2e2;
+  color: #b91c1c;
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
 }
 
-
-/* Stats */
-.hero-stats{
-
-    display:flex;
-
-    gap:2rem;
-
-    margin-top:2.5rem;
-
-    padding-top:2rem;
-
-    border-top:1px solid rgba(255,255,255,.15);
+.rdv-form {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  align-items: end;
+  margin-bottom: 1rem;
 }
 
-/* Stat individuelle */
-.hero-stat{
-
-    display:flex;
-    flex-direction:column;
-
-    color:white;
+.form-group label {
+  display: block;
+  font-size: 0.85rem;
+  margin-bottom: 0.25rem;
 }
 
-.hero-stat span:first-child{
-    font-size:24px;
-    font-weight:700;
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 0.5rem 0.6rem;
+  border-radius: 0.5rem;
+  border: 1px solid #d1d5db;
+  font-size: 0.9rem;
 }
 
-.hero-stat span:last-child{
-    font-size:12px;
-    opacity:0.7;
+.teleconsultation {
+  font-size: 0.9rem;
+  color: #374151;
 }
 
+/* Expertises */
 
-/* Partie droite */
-.hero-right{
-
-    background:var(--blue-light);
-
-    padding:2.5rem;
-
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-
-    gap:16px;
+.expertises {
+  padding: 2.5rem 3rem;
 }
 
-
-/* =======================================================
-   CARD DE RECHERCHE
-======================================================= */
-
-.search-card{
-
-    background:white;
-
-    border:1px solid var(--border);
-
-    border-radius:var(--radius);
-
-    overflow:hidden;
+.expertises h2 {
+  margin-bottom: 0.25rem;
 }
 
-
-/* Onglets */
-.search-tabs{
-    display:flex;
-    border-bottom:1px solid var(--border);
+.subtitle {
+  color: #6b7280;
+  margin-bottom: 1.5rem;
 }
 
-.stab{
-
-    flex:1;
-
-    border:none;
-
-    background:transparent;
-
-    padding:12px;
-
-    cursor:pointer;
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
 }
 
-
-/* Onglet sélectionné */
-.stab.active{
-
-    color:var(--blue);
-
-    border-bottom:2px solid var(--blue);
-
-    background:var(--blue-light);
+.card {
+  background: #ffffff;
+  border-radius: 0.75rem;
+  padding: 1rem;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08);
 }
 
-
-/* Corps formulaire */
-.search-body{
-    padding:1.25rem;
+.card h3 {
+  margin-bottom: 0.4rem;
 }
 
-
-/* Labels */
-.field-label{
-
-    font-size:11px;
-
-    text-transform:uppercase;
-
-    margin-bottom:5px;
+.card p {
+  font-size: 0.9rem;
+  color: #4b5563;
+  margin-bottom: 0.6rem;
 }
 
-
-/* Inputs */
-.field-input{
-
-    width:100%;
-
-    border:1px solid var(--border);
-
-    border-radius:6px;
-
-    padding:9px 12px;
-
-    margin-bottom:12px;
+.link {
+  font-size: 0.9rem;
+  font-weight: 500;
 }
 
-/* Focus */
-.field-input:focus{
-    border-color:var(--blue-mid);
+.more-specialties {
+  margin-top: 1.5rem;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  font-size: 0.9rem;
 }
 
+/* Actualités */
 
-/* Grille formulaire */
-.search-grid{
-
-    display:grid;
-
-    grid-template-columns:1fr 1fr;
-
-    gap:10px;
+.news {
+  padding: 2.5rem 3rem;
+  background: #ffffff;
 }
 
-
-/* Bouton recherche */
-.btn-search{
-
-    width:100%;
-
-    border:none;
-
-    background:var(--blue);
-
-    color:white;
-
-    border-radius:6px;
-
-    padding:11px;
-
-    cursor:pointer;
+.news-list {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1rem;
 }
 
-
-/* =======================================================
-   SECTION SPÉCIALITÉS
-======================================================= */
-
-.section{
-    padding:3rem;
+.news-item {
+  padding: 1rem;
+  border-radius: 0.75rem;
+  background: #f9fafb;
 }
 
-
-/* Header section */
-.section-header{
-
-    display:flex;
-
-    align-items:flex-end;
-    justify-content:space-between;
-
-    margin-bottom:2rem;
+.news-item h3 {
+  margin: 0.4rem 0;
 }
 
-
-/* Grille cartes */
-.spec-grid{
-
-    display:grid;
-
-    grid-template-columns:repeat(4,1fr);
-
-    gap:12px;
+.news-item p {
+  font-size: 0.9rem;
+  color: #4b5563;
+  margin-bottom: 0.4rem;
 }
 
-
-/* Carte */
-.spec-card{
-
-    background:white;
-
-    border:1px solid var(--border);
-
-    border-radius:var(--radius);
-
-    padding:1.25rem;
-
-    display:flex;
-    flex-direction:column;
-
-    gap:10px;
-
-    transition:.2s;
+.tag {
+  display: inline-block;
+  font-size: 0.75rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 999px;
+  color: #111827;
 }
 
-/* Hover */
-.spec-card:hover{
-
-    border-color:var(--blue-mid);
-
-    transform:translateY(-2px);
+.tag.innovation {
+  background: #e0f2fe;
 }
 
-
-/* =======================================================
-   SECTION NEWS
-======================================================= */
-
-.news-section{
-    padding:0 3rem 3rem;
+.tag.recherche {
+  background: #e5e7eb;
 }
 
-
-/* Layout news */
-.news-grid{
-
-    display:grid;
-
-    grid-template-columns:1.4fr 1fr 1fr;
-
-    gap:16px;
+.tag.communique {
+  background: #fee2e2;
 }
 
-
-/* Carte principale */
-.news-main{
-
-    background:white;
-
-    border:1px solid var(--border);
-
-    border-radius:var(--radius);
-
-    overflow:hidden;
+.tag.formation {
+  background: #ede9fe;
 }
 
-
-/* Petites news */
-.news-small{
-
-    background:white;
-
-    border:1px solid var(--border);
-
-    border-radius:var(--radius);
-
-    padding:1.1rem;
-
-    cursor:pointer;
+.date {
+  font-size: 0.8rem;
+  color: #6b7280;
 }
 
+/* Espace patient */
 
-/* =======================================================
-   SECTION PATIENT
-======================================================= */
-
-.patient-section{
-
-    background:var(--blue);
-
-    padding:3rem;
+.espace-patient {
+  padding: 2.5rem 3rem;
 }
 
-
-/* Layout */
-.patient-grid{
-
-    display:grid;
-
-    grid-template-columns:1fr 1fr;
-
-    gap:2rem;
-
-    align-items:center;
+.espace-patient p {
+  max-width: 600px;
+  margin: 0.5rem 0 1rem;
 }
 
-
-/* Cartes patient */
-.patient-cards{
-
-    display:grid;
-
-    grid-template-columns:1fr 1fr;
-
-    gap:12px;
+.features {
+  list-style: disc;
+  margin-left: 1.2rem;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
 }
 
-
-.pcard{
-
-    background:rgba(255,255,255,.1);
-
-    border:1px solid rgba(255,255,255,.15);
-
-    border-radius:var(--radius);
-
-    padding:1.25rem;
-
-    transition:.2s;
+.espace-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
 }
 
-
-/* Hover */
-.pcard:hover{
-    background:rgba(255,255,255,.15);
+.espace-card {
+  background: #ffffff;
+  border-radius: 0.75rem;
+  padding: 1rem;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08);
 }
 
+/* Footer */
 
-/* =======================================================
-   FOOTER
-======================================================= */
-
-footer{
-
-    background:#0E2035;
-
-    color:rgba(255,255,255,.6);
-
-    padding:2.5rem 3rem 1.5rem;
+.footer {
+  background: #0f172a;
+  color: #e5e7eb;
+  padding: 2.5rem 3rem 1.5rem;
+  margin-top: 2rem;
 }
 
-
-/* Colonnes footer */
-.footer-grid{
-
-    display:grid;
-
-    grid-template-columns:2fr 1fr 1fr 1fr;
-
-    gap:2rem;
-
-    margin-bottom:2rem;
+.footer-main {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
 }
 
+.footer-block h3,
+.footer-block h4 {
+  margin-bottom: 0.5rem;
+}
 
-/* Barre basse */
-.footer-bar{
+.footer-block ul {
+  list-style: none;
+}
 
-    border-top:1px solid rgba(255,255,255,.08);
+.footer-block li {
+  margin-bottom: 0.3rem;
+  font-size: 0.9rem;
+}
 
-    padding-top:1.25rem;
+.footer-block a {
+  color: #cbd5f5;
+}
 
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
+.footer-bottom {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  color: #9ca3af;
 }
