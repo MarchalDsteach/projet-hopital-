@@ -9,10 +9,27 @@
 <body>
     <div class="container">
         <h1>Bienvenue à l'Hôpital Medicare</h1>
-        <p>Votre santé est notre priorité. Nous offrons des soins de qualité et un service personnalisé.</p>
-        <p>Si vous êtes un patient ou un membre du personnel, veuillez vous connecter pour accéder à votre espace.</p>
-        <button onclick="window.location.href='login.php'">Se connecter</button>
-        <p>Pour plus d'informations, contactez-nous.</p>
+        <p>Votre santé est notre priorité. Nous sommes là pour vous offrir un service médical de qualité et un accompagnement humain.</p>
+
+        <div class="home-actions">
+            <button onclick="window.location.href='login.php'">Se connecter</button>
+            <button onclick="window.location.href='contact.php'">Contactez-nous</button>
+        </div>
+
+        <section class="home-features">
+            <h2>Nos services</h2>
+            <ul>
+                <li>Consultations médicales</li>
+                <li>Prise de rendez-vous rapide</li>
+                <li>Accueil et orientation des patients</li>
+                <li>Support administratif</li>
+            </ul>
+        </section>
+
+        <section class="home-info">
+            <h2>Accès rapide</h2>
+            <p>Si vous êtes membre du personnel, utilisez votre espace dédié pour gérer les rendez-vous et les dossiers patients.</p>
+        </section>
     </div>
 </body>
 </html>
