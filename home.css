@@ -44,6 +44,16 @@ body{
     min-height:100vh;
 }
 
+/* Screen reader only */
+.sr-only{
+    position:absolute;
+    left:-10000px;
+    top:auto;
+    width:1px;
+    height:1px;
+    overflow:hidden;
+}
+
 
 /* =======================================================
    NAVIGATION
@@ -163,6 +173,40 @@ nav{
     cursor:pointer;
 }
 
+/* Bouton blanc */
+.btn-white{
+
+    background:white;
+    color:var(--blue);
+
+    border:1px solid var(--blue);
+
+    padding:8px 18px;
+
+    border-radius:6px;
+
+    cursor:pointer;
+}
+
+/* Bouton fantôme */
+.btn-ghost{
+
+    background:transparent;
+    color:var(--blue);
+
+    border:1px solid rgba(0,75,141,0.16);
+
+    padding:8px 18px;
+
+    border-radius:6px;
+
+    cursor:pointer;
+}
+
+.btn-ghost:hover{
+    background:var(--blue-light);
+}
+
 
 /* =======================================================
    HERO SECTION
@@ -242,6 +286,19 @@ nav{
 }
 
 
+/* Titre droite hero */
+.hero-right-title{
+
+    font-size:18px;
+
+    font-weight:600;
+
+    color:var(--text);
+
+    margin-bottom:1rem;
+}
+
+
 /* Boutons */
 .hero-actions{
     display:flex;
@@ -261,6 +318,25 @@ nav{
     padding-top:2rem;
 
     border-top:1px solid rgba(255,255,255,.15);
+}
+
+/* Stat individuelle */
+.hero-stat{
+
+    display:flex;
+    flex-direction:column;
+
+    color:white;
+}
+
+.hero-stat span:first-child{
+    font-size:24px;
+    font-weight:700;
+}
+
+.hero-stat span:last-child{
+    font-size:12px;
+    opacity:0.7;
 }
 
 
