@@ -1,9 +1,9 @@
 <?php
-session_start();
-session_regenerate_id(true);
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+require_once 'security.php';
+
+ini_set('display_errors', 0);
+error_reporting(0);
+
 // Connexion à la base de données
 $servername = "localhost";
 $username = "root";
@@ -16,8 +16,10 @@ $success = null;
 $conn = new mysqli($servername, $username, $password, $dbname);
 
 if ($conn->connect_error) {
-    die("Connexion échouée: " . $conn->connect_error);
+    error_log("connexion échouée : " . $conn->connect_error);
+    die("une erreur est survenue.");
 }
+?>
 
 
 // Traitement du formulaire de connexion
@@ -108,8 +110,8 @@ $conn->close();
     <div class="container">
         <h1>Hôpital Medicare - Connexion</h1>
         
-        <?php if (isset($error)) echo "<p class='error'>$error</p>"; ?>
-        <?php if (isset($success)) echo "<p class='success'>$success</p>"; ?>
+        <?php if (isset($error)) echo "<p class='error'>" . e($error) . "</p>"; ?>
+        <?php if (isset($success)) echo "<p class='success'>" . e($success) . "</p>"; ?>
 
         <div class="google-login">
             <div id="g_id_onload"

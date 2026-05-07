@@ -1,9 +1,6 @@
 <?php
-session_start();
-if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'medecin') {
-    header("Location: login.php");
-    exit();
-}
+require_once 'security.php';
+requireRole ('medecin');
 ?>
 
 <!DOCTYPE html>
@@ -17,7 +14,9 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'medecin') {
 <body>
     <div class="container">
         <h1>Espace Médecin - Hôpital Medicare</h1>
-        <p>Bienvenue, Dr. <?php echo $_SESSION['prenom'] . ' ' . $_SESSION['nom']; ?></p>
+        <p>Bienvenue,
+             Dr. <?php echo e($_SESSION['prenom']); ?>  
+            <?php echo e($_SESSION['nom']); ?></p>
         <p>Gérer les patients, consulter les dossiers médicaux, etc.</p>
         <!-- Ajouter des fonctionnalités médecin ici -->
         <a href="logout.php">Se déconnecter</a>

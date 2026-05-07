@@ -1,21 +1,6 @@
 <?php
-session_start();
-//  pas connecté
-if (!isset($_SESSION['user_id'])) {
-    header("Location: index.php");
-    exit();
-}
-
-//  pas admin
-if ($_SESSION['role'] !== 'admin') {
-    header("Location: patient.php");
-    exit();
-}
-
-if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
-    header("Location: login.php");
-    exit();
-}
+require_once 'security.php';
+requireRole('admin');
 ?>
 
 <!DOCTYPE html>
@@ -29,7 +14,11 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
 <body>
     <div class="container">
         <h1>Mode Admin - Hôpital Medicare</h1>
-        <p>Bienvenue, <?php echo $_SESSION['prenom'] . ' ' . $_SESSION['nom']; ?> (Admin)</p>
+        <p>Bienvenue, 
+        <?php echo e($_SESSION['prenom']); ?>
+        <?php echo e($_SESSION['nom']); ?>
+            (Admin)
+        </p>
         <p>Ici, vous pouvez gérer les utilisateurs, les rendez-vous, etc.</p>
         <!-- Ajouter des fonctionnalités admin ici -->
         <a href="logout.php">Se déconnecter</a>
