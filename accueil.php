@@ -1,6 +1,9 @@
 <?php
-session_start();
-if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'accueil') {
+require_once 'security.php';
+
+requireLogin();
+
+if ($_SESSION['role'] !=='accueil') {
     header("Location: login.php");
     exit();
 }
