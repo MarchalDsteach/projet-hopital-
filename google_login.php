@@ -56,7 +56,7 @@ $prenom = $payload['given_name'] ?? '';
 $google_id = $payload['sub'];
 
 //  Vérifier si utilisateur existe
-$stmt = $conn->prepare("SELECT id, role, google_id FROM utilisateurs WHERE email = ?");
+$stmt = $conn->prepare("SELECT id, nom, prenom, role, google_id FROM utilisateurs WHERE email = ?");
 $stmt->bind_param("s", $email);
 $stmt->execute();
 $result = $stmt->get_result();
