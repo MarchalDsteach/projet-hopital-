@@ -13,7 +13,7 @@ if ($conn->connect_error) {
     exit();
 }
 
-$adminEmails = ['admin@hopital-foch.org'];
+$adminEmails = ['admin@hopital-foch.org', 'engambejude@gmail.com'];
 
 //  Vérification token Google
 function verifyGoogleToken($token) {
