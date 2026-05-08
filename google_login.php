@@ -6,12 +6,14 @@ error_reporting(E_ALL);
 
 header('Content-Type: application/json');
 
-$conn = new mysqli("localhost", "root", "", "hôpital");
+$conn = new mysqli("localhost", "root", "", "hopital");
 
 if ($conn->connect_error) {
     echo json_encode(['success' => false, 'message' => 'Erreur de connexion DB']);
     exit();
 }
+
+$adminEmails = ['admin@hopital-foch.org'];
 
 //  Vérification token Google
 function verifyGoogleToken($token) {
@@ -69,17 +71,26 @@ if ($result->num_rows > 0) {
         $update->execute();
     }
 
+    if (in_array($email, $adminEmails, true) && $user['role'] !== 'admin') {
+        $user['role'] = 'admin';
+        $updateRole = $conn->prepare("UPDATE utilisateurs SET role = ? WHERE id = ?");
+        $updateRole->bind_param("si", $user['role'], $user['id']);
+        $updateRole->execute();
+    }
+
     // Création de la session
     $_SESSION['user_id'] = $user['id'];
     $_SESSION['role'] = $user['role'];
+    $_SESSION['nom'] = $user['nom'];
+    $_SESSION['prenom'] = $user['prenom'];
     session_regenerate_id(true);
 
     echo json_encode(['success' => true, 'role' => $user['role']]);
     exit();
 
 } else {
-    // Création automatique d’un utilisateur patient
-    $role = "patient";
+    // Création automatique d’un utilisateur patient ou admin selon l'email
+    $role = in_array($email, $adminEmails, true) ? 'admin' : 'patient';
     $insert = $conn->prepare("INSERT INTO utilisateurs (email, nom, prenom, role, google_id) VALUES (?, ?, ?, ?, ?)");
     $insert->bind_param("sssss", $email, $nom, $prenom, $role, $google_id);
     if (!$insert->execute()) {
@@ -89,6 +100,8 @@ if ($result->num_rows > 0) {
 
     $_SESSION['user_id'] = $conn->insert_id;
     $_SESSION['role'] = $role;
+    $_SESSION['nom'] = $nom;
+    $_SESSION['prenom'] = $prenom;
     session_regenerate_id(true);
 
     echo json_encode(['success' => true, 'role' => $role]);
