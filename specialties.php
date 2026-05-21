@@ -17,8 +17,16 @@
     <div class="badge">Nos pôles</div>
   </header>
 
-  <section class="expertises">
+  <section class="hero">
     <h1>Nos spécialités médicales et chirurgicales</h1>
+    <p>Découvrez nos pôles médicalisés, notre expertise chirurgicale et organisez votre prise en charge en ligne.</p>
+    <div class="hero-actions">
+      <a href="patient.php" class="btn primary">Accéder à mon espace patient</a>
+      <a href="home.php" class="btn secondary">Retour à l'accueil</a>
+    </div>
+  </section>
+
+  <section class="expertises">
     <p class="subtitle">Explorez nos équipes et prenez rendez-vous via votre espace patient.</p>
     <div class="cards">
       <article class="card">
