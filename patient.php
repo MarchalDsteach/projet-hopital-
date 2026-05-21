@@ -49,6 +49,25 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'patient') {
         </div>
     </section>
 
+    <section class="profile-overview">
+        <article class="profile-card">
+            <h3>Prochain rendez-vous</h3>
+            <p>Consultation cardiologie le 28 mai 2026 à 14h00.</p>
+        </article>
+        <article class="profile-card">
+            <h3>Dernier document</h3>
+            <p>Compte-rendu radiologie disponible depuis le 18 mai 2026.</p>
+        </article>
+        <article class="profile-card">
+            <h3>Messages</h3>
+            <p>2 messages non lus de votre équipe médicale.</p>
+        </article>
+        <article class="profile-card">
+            <h3>Ordonnance</h3>
+            <p>Renouvellement disponible en ligne dès aujourd'hui.</p>
+        </article>
+    </section>
+
     <section class="expertises" id="mes-rdv">
         <h2>Mes rendez-vous</h2>
         <p class="subtitle">Planifiez et gérez vos consultations</p>
@@ -104,6 +123,25 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'patient') {
             <div class="espace-card">
                 <h3>💊 Ordonnances</h3>
                 <p>Retrouver et télécharger mes prescriptions.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact-section" id="contacts">
+        <h2>Contacts et support</h2>
+        <p>Besoin d'aide ? Nos équipes sont là pour vous accompagner.</p>
+        <div class="contact-grid">
+            <div class="contact-card">
+                <h3>Urgences</h3>
+                <p>Tél. 01 46 25 20 00 — ouvert 24h/24</p>
+            </div>
+            <div class="contact-card">
+                <h3>Accueil patient</h3>
+                <p>accueil@hopital-medicare.fr</p>
+            </div>
+            <div class="contact-card">
+                <h3>Assistance technique</h3>
+                <p>support@hopital-medicare.fr</p>
             </div>
         </div>
     </section>
