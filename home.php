@@ -10,7 +10,7 @@
     <div class="logo">Hôpital Medicare</div>
     <nav class="main-nav">
       <a href="home.php">Accueil</a>
-      <a href="#expertises">Spécialités</a>
+      <a href="specialties.php">Spécialités</a>
       <a href="#rdv">Prendre RDV</a>
       <a href="#espace-patient">Hospitalisation</a>
       <a href="#news">Recherche</a>
@@ -29,7 +29,7 @@
     </p>
     <div class="hero-actions">
       <a href="patient.php" class="btn primary">Prendre rendez-vous</a>
-      <a href="#expertises" class="btn secondary">Découvrir nos services</a>
+      <a href="specialties.php" class="btn secondary">Découvrir nos services</a>
     </div>
     <div class="stats">
       <div class="stat">
@@ -124,7 +124,7 @@
     </div>
     <div class="more-specialties">
       <span>+ 45 spécialités</span>
-      <a href="#expertises" class="link">Explorez l'ensemble de nos pôles médicaux et chirurgicaux →</a>
+      <a href="specialties.php" class="link">Explorez l'ensemble de nos pôles médicaux et chirurgicaux →</a>
     </div>
   </section>
 
@@ -212,9 +212,9 @@
         <h4>Soins</h4>
         <ul>
           <li><a href="#rdv">Urgences</a></li>
-          <li><a href="#expertises">Spécialités médicales</a></li>
-          <li><a href="#expertises">Chirurgie</a></li>
-          <li><a href="#expertises">Maternité</a></li>
+          <li><a href="specialties.php">Spécialités médicales</a></li>
+          <li><a href="specialties.php">Chirurgie</a></li>
+          <li><a href="specialties.php">Maternité</a></li>
           <li><a href="login.php">Consultations externes</a></li>
         </ul>
       </div>
