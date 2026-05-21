@@ -9,14 +9,14 @@
   <header class="header">
     <div class="logo">Hôpital Medicare</div>
     <nav class="main-nav">
-      <a href="#">Accueil</a>
-      <a href="#">Spécialités</a>
-      <a href="#">Prendre RDV</a>
-      <a href="#">Hospitalisation</a>
-      <a href="#">Recherche</a>
-      <a href="#">L'hôpital</a>
-      <a href="#">Espace patient</a>
-      <a href="#">Urgences</a>
+      <a href="home.php">Accueil</a>
+      <a href="#expertises">Spécialités</a>
+      <a href="#rdv">Prendre RDV</a>
+      <a href="#espace-patient">Hospitalisation</a>
+      <a href="#news">Recherche</a>
+      <a href="#news">L'hôpital</a>
+      <a href="login.php">Espace patient</a>
+      <a href="#rdv">Urgences</a>
     </nav>
     <div class="badge">Établissement privé d'intérêt collectif</div>
   </header>
@@ -28,8 +28,8 @@
       parcours de soin, de la consultation à la chirurgie de pointe.
     </p>
     <div class="hero-actions">
-      <a href="#" class="btn primary">Prendre rendez-vous</a>
-      <a href="#" class="btn secondary">Découvrir nos services</a>
+      <a href="#rdv" class="btn primary">Prendre rendez-vous</a>
+      <a href="#expertises" class="btn secondary">Découvrir nos services</a>
     </div>
     <div class="stats">
       <div class="stat">
@@ -47,7 +47,7 @@
     </div>
   </section>
 
-  <section class="rdv">
+  <section class="rdv" id="rdv">
     <h2>Prendre rendez-vous</h2>
     <div class="rdv-types">
       <button class="tab active">Consultation</button>
@@ -82,7 +82,7 @@
     </div>
   </section>
 
-  <section class="expertises">
+  <section class="expertises" id="expertises">
     <h2>Expertises médicales</h2>
     <p class="subtitle">Nos spécialités</p>
     <div class="cards">
@@ -128,7 +128,7 @@
     </div>
   </section>
 
-  <section class="news">
+  <section class="news" id="news">
     <h2>Actualités</h2>
     <p class="subtitle">Vie de l'hôpital</p>
     <div class="news-list">
@@ -156,7 +156,7 @@
     </div>
   </section>
 
-  <section class="espace-patient">
+  <section class="espace-patient" id="espace-patient">
     <h2>Votre espace patient en ligne</h2>
     <p>
       Gérez vos rendez-vous, accédez à vos résultats d'examens et communiquez avec votre équipe médicale
@@ -168,7 +168,7 @@
       <li>Messagerie sécurisée avec vos praticiens</li>
       <li>Facturation et remboursements</li>
     </ul>
-    <a href="#" class="btn primary">Créer mon espace patient</a>
+    <a href="login.php" class="btn primary">Créer mon espace patient</a>
 
     <div class="espace-grid">
       <div class="espace-card">
