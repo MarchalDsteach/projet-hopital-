@@ -1,17 +1,6 @@
-<?php
-session_start();
+﻿<?php
 session_start();
 
-if (!isset($_SESSION['user_id'])) {
-    header("Location: index.php");
-    exit();
-}
-
-// optionnel : forcer patient uniquement
-if ($_SESSION['role'] !== 'patient') {
-    header("Location: index.php");
-    exit();
-}
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'patient') {
     header("Location: login.php");
     exit();
@@ -23,16 +12,129 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'patient') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Patient - Hôpital Medicare</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Mon espace patient — Hôpital Medicare</title>
+    <link rel="stylesheet" href="home.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Espace Patient - Hôpital Medicare</h1>
-        <p>Bienvenue, <?php echo $_SESSION['prenom'] . ' ' . $_SESSION['nom']; ?> (Patient)</p>
-        <p>Consultez vos rendez-vous, résultats, etc.</p>
-        <!-- Ajouter des fonctionnalités patient ici -->
-        <a href="logout.php">Se déconnecter</a>
-    </div>
+    <header class="header">
+        <div class="logo">Hôpital Medicare</div>
+        <nav class="main-nav">
+            <a href="home.php">Accueil</a>
+            <a href="patient.php" class="active">Espace patient</a>
+            <a href="logout.php">Déconnexion</a>
+        </nav>
+        <div class="badge">Espace patient</div>
+    </header>
+
+    <section class="hero">
+        <h1>Bienvenue, <?php echo htmlspecialchars($_SESSION['prenom'] . ' ' . $_SESSION['nom']); ?>.</h1>
+        <p>Accédez à votre dossier médical, suivez vos rendez-vous et consultez vos résultats en toute sécurité.</p>
+        <div class="hero-actions">
+            <a href="#mes-rdv" class="btn primary">Mes rendez-vous</a>
+            <a href="#mes-resultats" class="btn secondary">Mes résultats</a>
+        </div>
+        <div class="stats">
+            <div class="stat">
+                <span class="stat-number">3</span>
+                <span class="stat-label">Rendez-vous à venir</span>
+            </div>
+            <div class="stat">
+                <span class="stat-number">7</span>
+                <span class="stat-label">Documents partagés</span>
+            </div>
+            <div class="stat">
+                <span class="stat-number">100%</span>
+                <span class="stat-label">Sécurité des données</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="expertises" id="mes-rdv">
+        <h2>Mes rendez-vous</h2>
+        <p class="subtitle">Planifiez et gérez vos consultations</p>
+        <div class="cards">
+            <article class="card">
+                <h3>Consultation cardiologie</h3>
+                <p>Le 28 mai 2026 à 14h00 avec le Dr Dupont</p>
+            </article>
+            <article class="card">
+                <h3>Examen radiologie</h3>
+                <p>Le 3 juin 2026 à 10h30, service imagerie</p>
+            </article>
+            <article class="card">
+                <h3>Suivi infirmier</h3>
+                <p>Le 12 juin 2026 à 09h00, prise de tension et bilan</p>
+            </article>
+        </div>
+    </section>
+
+    <section class="news" id="mes-resultats">
+        <h2>Mes résultats</h2>
+        <p class="subtitle">Accès rapide à vos bilans et documents</p>
+        <div class="news-list">
+            <article class="news-item">
+                <h3>Examen sanguin</h3>
+                <p>Disponible dans votre espace sécurisé.</p>
+                <span class="date">22 mai 2026</span>
+            </article>
+            <article class="news-item">
+                <h3>Compte-rendu radiologie</h3>
+                <p>Téléchargeable depuis votre tableau de bord.</p>
+                <span class="date">18 mai 2026</span>
+            </article>
+        </div>
+    </section>
+
+    <section class="espace-patient">
+        <h2>Services disponibles</h2>
+        <p>Voici les principaux services accessibles depuis votre espace patient.</p>
+        <div class="espace-grid">
+            <div class="espace-card">
+                <h3>📅 Mes rendez-vous</h3>
+                <p>Voir, modifier ou annuler mes rendez-vous.</p>
+            </div>
+            <div class="espace-card">
+                <h3>🧾 Mes résultats</h3>
+                <p>Consulter mes bilans et rapports médicaux.</p>
+            </div>
+            <div class="espace-card">
+                <h3>💬 Messagerie</h3>
+                <p>Échanger avec mon équipe médicale sécurisée.</p>
+            </div>
+            <div class="espace-card">
+                <h3>💊 Ordonnances</h3>
+                <p>Retrouver et télécharger mes prescriptions.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-main">
+            <div class="footer-block">
+                <h3>Hôpital Medicare</h3>
+                <p>40 rue Worth, 92150 Suresnes</p>
+                <p>Tél. 01 46 25 20 00</p>
+            </div>
+            <div class="footer-block">
+                <h4>Mon compte</h4>
+                <ul>
+                    <li><a href="patient.php">Mon profil</a></li>
+                    <li><a href="patient.php#mes-rdv">Mes rendez-vous</a></li>
+                    <li><a href="patient.php#mes-resultats">Mes résultats</a></li>
+                </ul>
+            </div>
+            <div class="footer-block">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="#contacts">Contacts et accès</a></li>
+                    <li><a href="logout.php">Se déconnecter</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>© 2026 Hôpital Medicare — Espace patient sécurisé</span>
+            <span>Confidentialité et protection des données</span>
+        </div>
+    </footer>
 </body>
 </html>

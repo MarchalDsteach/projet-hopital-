@@ -15,7 +15,7 @@
       <a href="#espace-patient">Hospitalisation</a>
       <a href="#news">Recherche</a>
       <a href="#news">L'hôpital</a>
-      <a href="login.php">Espace patient</a>
+      <a href="patient.php">Espace patient</a>
       <a href="#rdv">Urgences</a>
     </nav>
     <div class="badge">Établissement privé d'intérêt collectif</div>
@@ -168,7 +168,7 @@
       <li>Messagerie sécurisée avec vos praticiens</li>
       <li>Facturation et remboursements</li>
     </ul>
-    <a href="login.php" class="btn primary">Créer mon espace patient</a>
+    <a href="patient.php" class="btn primary">Créer mon espace patient</a>
 
     <div class="espace-grid">
       <div class="espace-card">
@@ -201,8 +201,8 @@
       <div class="footer-block">
         <h4>Patients</h4>
         <ul>
-          <li><a href="login.php">Prendre RDV</a></li>
-          <li><a href="login.php">Espace patient</a></li>
+          <li><a href="patient.php">Prendre RDV</a></li>
+          <li><a href="patient.php">Espace patient</a></li>
           <li><a href="#espace-patient">Préparer mon séjour</a></li>
           <li><a href="#news">Droits des patients</a></li>
           <li><a href="#contacts">Contacts et accès</a></li>
