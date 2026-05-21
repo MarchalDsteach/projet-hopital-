@@ -28,7 +28,7 @@
       parcours de soin, de la consultation à la chirurgie de pointe.
     </p>
     <div class="hero-actions">
-      <a href="#rdv" class="btn primary">Prendre rendez-vous</a>
+      <a href="patient.php" class="btn primary">Prendre rendez-vous</a>
       <a href="#expertises" class="btn secondary">Découvrir nos services</a>
     </div>
     <div class="stats">
@@ -89,37 +89,37 @@
       <article class="card">
         <h3>🫀 Cardiologie</h3>
         <p>Centre de référence en chirurgie cardiaque et rythmologie interventionnelle</p>
-        <a href="login.php" class="link">Prendre RDV →</a>
+        <a href="patient.php" class="link">Prendre RDV →</a>
       </article>
       <article class="card">
         <h3>🫁 Pneumologie</h3>
         <p>Traitement des maladies respiratoires, unité de transplantation pulmonaire</p>
-        <a href="login.php" class="link">Prendre RDV →</a>
+        <a href="patient.php" class="link">Prendre RDV →</a>
       </article>
       <article class="card">
         <h3>🧠 Neurologie</h3>
         <p>Prise en charge des AVC, épilepsie et maladies neurodégénératives</p>
-        <a href="login.php" class="link">Prendre RDV →</a>
+        <a href="patient.php" class="link">Prendre RDV →</a>
       </article>
       <article class="card">
         <h3>🦷 Cancérologie</h3>
         <p>Unité d'oncologie intégrative et essais cliniques de phase III</p>
-        <a href="login.php" class="link">Prendre RDV →</a>
+        <a href="patient.php" class="link">Prendre RDV →</a>
       </article>
       <article class="card">
         <h3>🦴 Orthopédie</h3>
         <p>Chirurgie prothétique, arthroscopie, rééducation fonctionnelle</p>
-        <a href="login.php" class="link">Prendre RDV →</a>
+        <a href="patient.php" class="link">Prendre RDV →</a>
       </article>
       <article class="card">
         <h3>👁 Ophtalmologie</h3>
         <p>Chirurgie réfractive au laser, glaucome, chirurgie de la cataracte</p>
-        <a href="login.php" class="link">Prendre RDV →</a>
+        <a href="patient.php" class="link">Prendre RDV →</a>
       </article>
       <article class="card">
         <h3>🍼 Maternité</h3>
         <p>Maternité niveau III, néonatologie et suivi périnatal personnalisé</p>
-        <a href="login.php" class="link">Prendre RDV →</a>
+        <a href="patient.php" class="link">Prendre RDV →</a>
       </article>
     </div>
     <div class="more-specialties">

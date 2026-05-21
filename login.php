@@ -42,7 +42,11 @@ if (!password_verify($mot_de_passe, $user['password_hash'])) {
             $_SESSION['nom'] = $user['nom'];
             $_SESSION['prenom'] = $user['prenom'];
 
-            header("Location: " . $user['role'] . ".php");
+            $redirectPage = $user['role'] . '.php';
+            if (!file_exists($redirectPage)) {
+                $redirectPage = 'home.php';
+            }
+            header("Location: " . $redirectPage);
             exit();
         }
     } else {
