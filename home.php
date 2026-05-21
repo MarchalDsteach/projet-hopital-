@@ -89,42 +89,42 @@
       <article class="card">
         <h3>🫀 Cardiologie</h3>
         <p>Centre de référence en chirurgie cardiaque et rythmologie interventionnelle</p>
-        <a href="#" class="link">Prendre RDV →</a>
+        <a href="login.php" class="link">Prendre RDV →</a>
       </article>
       <article class="card">
         <h3>🫁 Pneumologie</h3>
         <p>Traitement des maladies respiratoires, unité de transplantation pulmonaire</p>
-        <a href="#" class="link">Prendre RDV →</a>
+        <a href="login.php" class="link">Prendre RDV →</a>
       </article>
       <article class="card">
         <h3>🧠 Neurologie</h3>
         <p>Prise en charge des AVC, épilepsie et maladies neurodégénératives</p>
-        <a href="#" class="link">Prendre RDV →</a>
+        <a href="login.php" class="link">Prendre RDV →</a>
       </article>
       <article class="card">
         <h3>🦷 Cancérologie</h3>
         <p>Unité d'oncologie intégrative et essais cliniques de phase III</p>
-        <a href="#" class="link">Prendre RDV →</a>
+        <a href="login.php" class="link">Prendre RDV →</a>
       </article>
       <article class="card">
         <h3>🦴 Orthopédie</h3>
         <p>Chirurgie prothétique, arthroscopie, rééducation fonctionnelle</p>
-        <a href="#" class="link">Prendre RDV →</a>
+        <a href="login.php" class="link">Prendre RDV →</a>
       </article>
       <article class="card">
         <h3>👁 Ophtalmologie</h3>
         <p>Chirurgie réfractive au laser, glaucome, chirurgie de la cataracte</p>
-        <a href="#" class="link">Prendre RDV →</a>
+        <a href="login.php" class="link">Prendre RDV →</a>
       </article>
       <article class="card">
         <h3>🍼 Maternité</h3>
         <p>Maternité niveau III, néonatologie et suivi périnatal personnalisé</p>
-        <a href="#" class="link">Prendre RDV →</a>
+        <a href="login.php" class="link">Prendre RDV →</a>
       </article>
     </div>
     <div class="more-specialties">
       <span>+ 45 spécialités</span>
-      <a href="#" class="link">Explorez l'ensemble de nos pôles médicaux et chirurgicaux →</a>
+      <a href="#expertises" class="link">Explorez l'ensemble de nos pôles médicaux et chirurgicaux →</a>
     </div>
   </section>
 
@@ -190,7 +190,7 @@
     </div>
   </section>
 
-  <footer class="footer">
+  <footer class="footer" id="contacts">
     <div class="footer-main">
       <div class="footer-block">
         <h3>Hôpital Foch</h3>
@@ -201,31 +201,31 @@
       <div class="footer-block">
         <h4>Patients</h4>
         <ul>
-          <li><a href="#">Prendre RDV</a></li>
-          <li><a href="#">Espace patient</a></li>
-          <li><a href="#">Préparer mon séjour</a></li>
-          <li><a href="#">Droits des patients</a></li>
-          <li><a href="#">Contacts et accès</a></li>
+          <li><a href="login.php">Prendre RDV</a></li>
+          <li><a href="login.php">Espace patient</a></li>
+          <li><a href="#espace-patient">Préparer mon séjour</a></li>
+          <li><a href="#news">Droits des patients</a></li>
+          <li><a href="#contacts">Contacts et accès</a></li>
         </ul>
       </div>
       <div class="footer-block">
         <h4>Soins</h4>
         <ul>
-          <li><a href="#">Urgences</a></li>
-          <li><a href="#">Spécialités médicales</a></li>
-          <li><a href="#">Chirurgie</a></li>
-          <li><a href="#">Maternité</a></li>
-          <li><a href="#">Consultations externes</a></li>
+          <li><a href="#rdv">Urgences</a></li>
+          <li><a href="#expertises">Spécialités médicales</a></li>
+          <li><a href="#expertises">Chirurgie</a></li>
+          <li><a href="#expertises">Maternité</a></li>
+          <li><a href="login.php">Consultations externes</a></li>
         </ul>
       </div>
       <div class="footer-block">
         <h4>Hôpital</h4>
         <ul>
-          <li><a href="#">Présentation</a></li>
-          <li><a href="#">Recherche clinique</a></li>
-          <li><a href="#">Enseignement</a></li>
-          <li><a href="#">Recrutement</a></li>
-          <li><a href="#">Presse</a></li>
+          <li><a href="#news">Présentation</a></li>
+          <li><a href="#news">Recherche clinique</a></li>
+          <li><a href="#news">Enseignement</a></li>
+          <li><a href="#news">Recrutement</a></li>
+          <li><a href="#news">Presse</a></li>
         </ul>
       </div>
     </div>
