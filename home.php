@@ -1,3 +1,32 @@
+<?php
+$searchResults = [];
+$searchPerformed = false;
+$searchSpecialty = '';
+$searchDate = '';
+$searchType = '';
+
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['search_slot'])) {
+    $searchPerformed = true;
+    $searchSpecialty = trim($_GET['specialty'] ?? '');
+    $searchDate = trim($_GET['date'] ?? '');
+    $searchType = trim($_GET['consultation_type'] ?? '');
+
+    $allSlots = [
+        ['time' => '09h00', 'date' => '2026-05-25', 'specialty' => 'Cardiologie', 'type' => 'Première consultation', 'doctor' => 'Dr Dupont'],
+        ['time' => '10h30', 'date' => '2026-05-25', 'specialty' => 'Pneumologie', 'type' => 'Suivi', 'doctor' => 'Dr Morel'],
+        ['time' => '11h15', 'date' => '2026-05-26', 'specialty' => 'Neurologie', 'type' => 'Première consultation', 'doctor' => 'Dr Petit'],
+        ['time' => '14h00', 'date' => '2026-05-26', 'specialty' => 'Ophtalmologie', 'type' => 'Suivi', 'doctor' => 'Dr Thomas'],
+        ['time' => '15h30', 'date' => '2026-05-27', 'specialty' => 'Orthopédie', 'type' => 'Première consultation', 'doctor' => 'Dr Simon'],
+    ];
+
+    $searchResults = array_filter($allSlots, function ($slot) use ($searchSpecialty, $searchType, $searchDate) {
+        $matchesSpecialty = $searchSpecialty === '' || stripos($slot['specialty'], $searchSpecialty) !== false || stripos($slot['doctor'], $searchSpecialty) !== false;
+        $matchesType = $searchType === '' || stripos($slot['type'], $searchType) !== false;
+        $matchesDate = $searchDate === '' || $slot['date'] === $searchDate;
+        return $matchesSpecialty && $matchesType && $matchesDate;
+    });
+}
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -58,24 +87,48 @@
       <span class="badge-urgences">Urgences ouvertes 24h/24</span>
       <span class="urgences-phone">Tél. 01 46 25 20 00</span>
     </div>
-    <form class="rdv-form">
+    <form class="rdv-form" action="home.php" method="get">
+      <input type="hidden" name="search_slot" value="1">
       <div class="form-group">
         <label>Spécialité ou médecin</label>
-        <input type="text" placeholder="Ex : Cardiologie, Dr Dupont">
+        <input type="text" name="specialty" value="<?php echo htmlspecialchars($searchSpecialty); ?>" placeholder="Ex : Cardiologie, Dr Dupont">
       </div>
       <div class="form-group">
         <label>Date souhaitée</label>
-        <input type="text" placeholder="jj / mm / aaaa">
+        <input type="date" name="date" value="<?php echo htmlspecialchars($searchDate); ?>">
       </div>
       <div class="form-group">
         <label>Type de consultation</label>
-        <select>
-          <option>Première consultation</option>
-          <option>Suivi</option>
+        <select name="consultation_type">
+          <option value="">Tous types</option>
+          <option value="Première consultation"<?php echo $searchType === 'Première consultation' ? ' selected' : ''; ?>>Première consultation</option>
+          <option value="Suivi"<?php echo $searchType === 'Suivi' ? ' selected' : ''; ?>>Suivi</option>
         </select>
       </div>
       <button type="submit" class="btn primary">Rechercher un créneau</button>
     </form>
+
+    <?php if ($searchPerformed): ?>
+    <section class="search-results">
+      <h3>Résultats de recherche</h3>
+      <?php if (!empty($searchResults)): ?>
+        <div class="cards">
+          <?php foreach ($searchResults as $slot): ?>
+            <article class="card">
+              <h4><?php echo htmlspecialchars($slot['specialty']); ?> — <?php echo htmlspecialchars($slot['type']); ?></h4>
+              <p><strong>Date :</strong> <?php echo htmlspecialchars(date('d/m/Y', strtotime($slot['date']))); ?>
+              <br><strong></strong>Heure :</strong> <?php echo htmlspecialchars($slot['time']); ?>
+              <br><strong>Médecin :</strong> <?php echo htmlspecialchars($slot['doctor']); ?></p>
+              <a href="patient.php" class="link">Voir l'espace patient</a>
+            </article>
+          <?php endforeach; ?>
+        </div>
+      <?php else: ?>
+        <p class="subtitle">Aucun créneau trouvé pour ces critères. Essayez une autre spécialité ou date.</p>
+      <?php endif; ?>
+    </section>
+    <?php endif; ?>
+
     <div class="teleconsultation">
       <strong>🖥 Téléconsultation</strong>
       <p>Consultation vidéo sous 24h</p>
