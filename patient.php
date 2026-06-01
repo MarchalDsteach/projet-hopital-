@@ -1,4 +1,6 @@
+/* COMMENTAIRE AJOUTÉ : Ce fichier contient du code PHP du projet Hôpital Medicare. */
 ﻿<?php
+// COMMENTAIRE : inclusion de config.php pour charger les constantes, la sécurité et les utilitaires partagés.
 require_once 'config.php';
 secure_session_start();
 

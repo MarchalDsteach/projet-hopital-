@@ -1,10 +1,12 @@
 <?php
+/* COMMENTAIRE AJOUTÉ : Ce fichier contient du code PHP du projet Hôpital Medicare. */
 require_once 'config.php';
 secure_session_start();
 
 $error = null;
 $success = null;
 
+// COMMENTAIRE : ouverture du bloc try/catch pour capturer les exceptions et afficher un message convivial.
 try {
     $conn = get_db_connection();
 } catch (RuntimeException $e) {
@@ -196,10 +198,12 @@ if ($conn instanceof mysqli) {
     </div>
 
     <script>
+// COMMENTAIRE : affiche le modal d’inscription utilisateur.
         function openRegisterModal() {
             document.getElementById('registerModal').style.display = 'block';
         }
 
+// COMMENTAIRE : masque le modal d’inscription.
         function closeRegisterModal() {
             document.getElementById('registerModal').style.display = 'none';
         }
@@ -230,6 +234,7 @@ if ($conn instanceof mysqli) {
             console.error('Formulaire register NON TROUVÉ');
         }
 
+// COMMENTAIRE : traite la réponse de connexion Google et authentifie l’utilisateur.
         function handleGoogleSignIn(response) {
             // Send the JWT token to the server for verification
             fetch('google_login.php', {
@@ -265,6 +270,7 @@ if ($conn instanceof mysqli) {
             });
         }
 
+// COMMENTAIRE : affiche un message d’état lié à l’authentification Google.
         function displayGoogleMessage(message, isError = true) {
             const messageBox = document.getElementById('googleMessage');
             if (!messageBox) {

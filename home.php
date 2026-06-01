@@ -1,4 +1,5 @@
 <?php
+/* COMMENTAIRE AJOUTÉ : Ce fichier contient du code PHP du projet Hôpital Medicare. */
 $searchResults = [];
 $searchPerformed = false;
 $searchSpecialty = '';

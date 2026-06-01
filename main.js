@@ -1,3 +1,4 @@
+/* COMMENTAIRE AJOUTÉ : Ce fichier contient du code JavaScript du projet Hôpital Medicare. */
 const HopitalSite = (() => {
   const themeKey = 'hopital_theme_mode';
   const sectionIds = ['rdv', 'expertises', 'news', 'espace-patient', 'contacts'];
@@ -7,6 +8,7 @@ const HopitalSite = (() => {
     Examen: 'Accédez aux examens, imageries et bilans en ligne pour une préparation optimale de votre consultation.'
   };
 
+// COMMENTAIRE : initialise toutes les interactions et animations front-end du site.
   function init() {
     document.body.classList.add('hopital-ui-ready');
     injectThemeStyles();
@@ -23,6 +25,7 @@ const HopitalSite = (() => {
     showWelcomeToast();
   }
 
+// COMMENTAIRE : injecte dynamiquement les styles nécessaires au mode sombre et aux toasts.
   function injectThemeStyles() {
     const style = document.createElement('style');
     style.id = 'hopital-main-styles';
@@ -52,6 +55,7 @@ const HopitalSite = (() => {
     document.head.appendChild(style);
   }
 
+// COMMENTAIRE : active le défilement fluide pour les liens d’ancrage internes.
   function initSmoothNavigation() {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', event => {
@@ -66,6 +70,7 @@ const HopitalSite = (() => {
     });
   }
 
+// COMMENTAIRE : rend la barre de navigation collante lorsque l’utilisateur fait défiler la page.
   function initStickyHeader() {
     const header = document.querySelector('.header');
     if (!header) return;
@@ -79,6 +84,7 @@ const HopitalSite = (() => {
     observer.observe(document.documentElement);
   }
 
+// COMMENTAIRE : anime l’apparition des sections visibles lors du défilement.
   function initScrollReveal() {
     const elements = [
       ...document.querySelectorAll('.hero, .card, .news-item, .expertises article, .footer-block, .rdv, .expertises, .news, .espace-patient')
@@ -97,6 +103,7 @@ const HopitalSite = (() => {
     elements.forEach(el => revealObserver.observe(el));
   }
 
+// COMMENTAIRE : anime les compteurs numériques pour un effet visuel progressif.
   function initCounters() {
     const numbers = document.querySelectorAll('.stat-number');
     numbers.forEach(item => {
@@ -117,6 +124,7 @@ const HopitalSite = (() => {
     });
   }
 
+// COMMENTAIRE : gère le changement de contenu de la bannière en fonction des onglets sélectionnés.
   function initTabHeroSwitcher() {
     const buttons = document.querySelectorAll('.rdv-types .tab');
     const heroDescription = document.querySelector('.hero p');
@@ -132,6 +140,7 @@ const HopitalSite = (() => {
     });
   }
 
+// COMMENTAIRE : met en surbrillance le lien de navigation correspondant à la section actuelle.
   function initSectionHighlight() {
     const sections = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
     const navLinks = Array.from(document.querySelectorAll('.main-nav a')); 
@@ -149,6 +158,7 @@ const HopitalSite = (() => {
     sections.forEach(section => obs.observe(section));
   }
 
+// COMMENTAIRE : crée un bouton pour basculer entre les modes clair et sombre.
   function initThemeSwitcher() {
     const button = document.createElement('button');
     button.className = 'hopital-theme-switcher';
@@ -162,6 +172,7 @@ const HopitalSite = (() => {
     document.body.appendChild(button);
   }
 
+// COMMENTAIRE : applique le thème choisi et enregistre la préférence dans localStorage.
   function setTheme(theme, button) {
     if (theme === 'dark') {
       document.body.classList.add('dark-mode');
@@ -175,13 +186,16 @@ const HopitalSite = (() => {
     localStorage.setItem(themeKey, theme);
   }
 
+// COMMENTAIRE : active un effet parallax léger sur le bloc hero au mouvement de la souris.
   function initHeroParallax() {
     const hero = document.querySelector('.hero');
     if (!hero) return;
     hero.style.perspective = '1100px';
     hero.addEventListener('mousemove', event => {
       const rect = hero.getBoundingClientRect();
+// COMMENTAIRE : calcule la position horizontale normalisée de la souris pour l’effet parallax.
       const x = (event.clientX - rect.left) / rect.width - 0.5;
+// COMMENTAIRE : calcule la position verticale normalisée de la souris pour l’effet parallax.
       const y = (event.clientY - rect.top) / rect.height - 0.5;
       hero.style.transform = `rotateX(${y * 4}deg) rotateY(${x * 4}deg)`;
       hero.style.transformStyle = 'preserve-3d';
@@ -191,6 +205,7 @@ const HopitalSite = (() => {
     });
   }
 
+// COMMENTAIRE : applique l’effet de surbrillance aux champs de formulaire au focus et vérifie la validité avant envoi.
   function initFormGlow() {
     document.querySelectorAll('form input, form select, form textarea').forEach(input => {
       input.addEventListener('focus', () => input.style.boxShadow = '0 0 30px rgba(13,110,253,0.24)');
@@ -216,6 +231,7 @@ const HopitalSite = (() => {
     });
   }
 
+// COMMENTAIRE : fait clignoter légèrement le titre de la page pour attirer l’attention.
   function initPageTitlePulse() {
     const title = document.title;
     let tick = 0;
@@ -225,6 +241,7 @@ const HopitalSite = (() => {
     }, 8800);
   }
 
+// COMMENTAIRE : affiche un toast de bienvenue informatif au chargement de la page.
   function showWelcomeToast() {
     const messages = [
       'Bienvenue à l’Hôpital Medicare — une expérience plus fluide vous attend.',
@@ -240,6 +257,7 @@ const HopitalSite = (() => {
     setTimeout(() => toast.remove(), 7200);
   }
 
+// COMMENTAIRE : affiche un message temporaire de notification à l’écran.
   function showToast(message, type = 'info') {
     const toast = document.createElement('div');
     toast.className = 'hopital-toast show';

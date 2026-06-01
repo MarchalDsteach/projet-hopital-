@@ -1,4 +1,5 @@
 <?php
+/* COMMENTAIRE AJOUTÉ : Ce fichier contient du code PHP du projet Hôpital Medicare. */
 require_once 'config.php';
 secure_session_start();
 
@@ -222,10 +223,12 @@ $conn->close();
     <script>
         const pages = <?php echo json_encode($pages); ?>;
         
+// COMMENTAIRE : ouvre le modal de création d’une nouvelle page de contenu.
         function openAddModal() {
             document.getElementById('addModal').style.display = 'block';
         }
         
+// COMMENTAIRE : ouvre le modal d’édition et pré-remplit les champs avec les données existantes.
         function openEditModal(id) {
             const page = pages.find(p => p.id == id);
             if (!page) return;
@@ -238,11 +241,13 @@ $conn->close();
             document.getElementById('editModal').style.display = 'block';
         }
         
+// COMMENTAIRE : affiche une confirmation avant de supprimer une page de contenu.
         function confirmDelete(id) {
             document.getElementById('delete_id').value = id;
             document.getElementById('deleteModal').style.display = 'block';
         }
         
+// COMMENTAIRE : ferme le modal actuellement ouvert.
         function closeModal(modalId) {
             document.getElementById(modalId).style.display = 'none';
         }

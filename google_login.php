@@ -1,8 +1,10 @@
 <?php
+/* COMMENTAIRE AJOUTÉ : Ce fichier contient du code PHP du projet Hôpital Medicare. */
 require_once 'config.php';
 secure_session_start();
 header('Content-Type: application/json');
 
+// COMMENTAIRE : ouverture du bloc try/catch pour capturer les exceptions et afficher un message convivial.
 try {
     $conn = get_db_connection();
 } catch (RuntimeException $e) {
@@ -10,6 +12,7 @@ try {
     exit();
 }
 
+// COMMENTAIRE : vérifie le jeton Google OAuth et récupère les informations de l’utilisateur.
 function verifyGoogleToken(string $token) {
     $client_id = '989221879491-ldu7ab5ikrsn0v737itkru6ek9m57bbk.apps.googleusercontent.com';
     $url = 'https://oauth2.googleapis.com/tokeninfo?id_token=' . rawurlencode($token);

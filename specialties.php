@@ -1,3 +1,4 @@
+/* COMMENTAIRE AJOUTÉ : Ce fichier contient du code PHP du projet Hôpital Medicare. */
 <!DOCTYPE html>
 <html lang="fr">
 <head>

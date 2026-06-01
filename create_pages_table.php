@@ -1,6 +1,8 @@
 <?php
+/* COMMENTAIRE AJOUTÉ : Ce fichier contient du code PHP du projet Hôpital Medicare. */
 require_once 'config.php';
 
+// COMMENTAIRE : ouverture du bloc try/catch pour capturer les exceptions et afficher un message convivial.
 try {
     $conn = get_db_connection();
     

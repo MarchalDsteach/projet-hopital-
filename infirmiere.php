@@ -1,4 +1,5 @@
 <?php
+/* COMMENTAIRE AJOUTÉ : Ce fichier contient du code PHP du projet Hôpital Medicare. */
 require_once 'config.php';
 secure_session_start();
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'infirmiere') {

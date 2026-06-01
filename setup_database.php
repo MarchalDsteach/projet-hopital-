@@ -1,4 +1,5 @@
 <?php
+/* COMMENTAIRE AJOUTÉ : Ce fichier contient du code PHP du projet Hôpital Medicare. */
 // Connexion à la base de données
 $servername = "localhost";
 $username = "root"; // Utilisateur par défaut de XAMPP

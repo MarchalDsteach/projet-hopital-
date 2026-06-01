@@ -1,4 +1,5 @@
 <?php
+/* COMMENTAIRE AJOUTÉ : Ce fichier contient du code PHP du projet Hôpital Medicare. */
 require_once 'config.php';
 secure_session_start();
 //  pas connecté
@@ -707,6 +708,7 @@ const pages = {
   settings:   { label:'Paramètres',                crumb:'Administration / Paramètres' },
 };
 
+// COMMENTAIRE : affiche la page d’administration sélectionnée et met à jour le titre et le fil d’Ariane.
 function showPage(id) {
   document.querySelectorAll('.page-view').forEach(p => p.classList.remove('active'));
   document.getElementById('page-' + id).classList.add('active');
@@ -716,9 +718,11 @@ function showPage(id) {
   document.getElementById('breadcrumb').textContent = pages[id].crumb;
 }
 
+// COMMENTAIRE : ouvre une fenêtre modale en ajoutant la classe CSS de visibilité.
 function openModal(id) {
   document.getElementById(id).classList.add('open');
 }
+// COMMENTAIRE : ferme le modal actuellement ouvert.
 function closeModal(id) {
   document.getElementById(id).classList.remove('open');
 }
@@ -728,6 +732,7 @@ document.querySelectorAll('.modal-overlay').forEach(overlay => {
   });
 });
 
+// COMMENTAIRE : bascule l’état visuel d’un interrupteur entre activé et désactivé.
 function toggleSwitch(el) {
   const knob = el.querySelector('div');
   if (el.classList.contains('toggle-on')) {

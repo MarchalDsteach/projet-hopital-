@@ -1,4 +1,5 @@
 <?php
+/* COMMENTAIRE AJOUTÉ : Ce fichier contient du code PHP du projet Hôpital Medicare. */
 $conn = new mysqli('localhost', 'root', '', 'hopital');
 if ($conn->connect_error) {
     echo 'db fail: ' . $conn->connect_error;

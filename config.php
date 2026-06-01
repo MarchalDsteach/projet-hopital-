@@ -1,4 +1,5 @@
 <?php
+/* COMMENTAIRE AJOUTÉ : Ce fichier contient du code PHP du projet Hôpital Medicare. */
 // Configuration centrale de sécurité et de base de données
 error_reporting(0);
 ini_set('display_errors', '0');
@@ -19,6 +20,7 @@ define('CSRF_TOKEN_KEY', 'csrf_token');
 
 define('SESSION_INIT_KEY', 'session_initiated');
 
+// COMMENTAIRE : envoie des en-têtes HTTP de sécurité (CSP, HSTS, X-Frame-Options, etc.).
 function send_security_headers(): void {
     if (headers_sent()) {
         return;
@@ -39,6 +41,7 @@ function send_security_headers(): void {
     }
 }
 
+// COMMENTAIRE : vérifie la connexion et redirige vers HTTPS si nécessaire.
 function enforce_https(): void {
     if (php_sapi_name() === 'cli' || !isset($_SERVER['HTTP_HOST'])) {
         return;
@@ -61,6 +64,7 @@ function enforce_https(): void {
     }
 }
 
+// COMMENTAIRE : démarre une session sécurisée avec des cookies HttpOnly, Secure et SameSite.
 function secure_session_start(): void {
     enforce_https();
     if (session_status() === PHP_SESSION_NONE) {
@@ -87,6 +91,7 @@ function secure_session_start(): void {
     send_security_headers();
 }
 
+// COMMENTAIRE : crée une connexion MySQL et lance une exception en cas d’erreur.
 function get_db_connection(): mysqli {
     $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
     if ($conn->connect_error) {
@@ -97,20 +102,24 @@ function get_db_connection(): mysqli {
     return $conn;
 }
 
+// COMMENTAIRE : échappe les caractères spéciaux pour une sortie HTML sûre.
 function html_escape(string $value): string {
     return htmlspecialchars($value, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
 }
 
+// COMMENTAIRE : normalise et valide une adresse email en la convertissant en minuscules.
 function normalize_email(string $email): string {
     return filter_var(trim(strtolower($email)), FILTER_VALIDATE_EMAIL) ?: '';
 }
 
+// COMMENTAIRE : vérifie si l’email fait partie des adresses administratives autorisées.
 function is_admin_email(string $email): bool {
     $email = normalize_email($email);
     $adminEmails = unserialize(ADMIN_EMAILS, ['allowed_classes' => false]) ?: [];
     return in_array($email, array_map('strtolower', $adminEmails), true);
 }
 
+// COMMENTAIRE : génère ou récupère un jeton CSRF sécurisé stocké en session.
 function generate_csrf_token(): string {
     if (empty($_SESSION[CSRF_TOKEN_KEY])) {
         $_SESSION[CSRF_TOKEN_KEY] = bin2hex(random_bytes(32));
@@ -118,11 +127,13 @@ function generate_csrf_token(): string {
     return $_SESSION[CSRF_TOKEN_KEY];
 }
 
+// COMMENTAIRE : compare un jeton CSRF soumis au jeton stocké en session.
 function verify_csrf_token(?string $token): bool {
     return is_string($token) && !empty($_SESSION[CSRF_TOKEN_KEY]) &&
            hash_equals($_SESSION[CSRF_TOKEN_KEY], $token);
 }
 
+// COMMENTAIRE : redirige de manière sûre en bloquant les URL contenant des retours chariot.
 function safe_redirect(string $url): void {
     if (preg_match('/[\r\n]/', $url)) {
         return;

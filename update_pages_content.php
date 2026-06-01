@@ -1,9 +1,15 @@
 <?php
+/* COMMENTAIRE AJOUTÉ : Ce fichier contient du code PHP du projet Hôpital Medicare. */
+// Charger la configuration de la base de données et les fonctions de connexion
+// COMMENTAIRE : inclusion de config.php pour charger les constantes, la sécurité et les utilitaires partagés.
 require_once 'config.php';
 
+// COMMENTAIRE : ouverture du bloc try/catch pour capturer les exceptions et afficher un message convivial.
 try {
+    // Établir une connexion à la base de données
     $conn = get_db_connection();
     
+    // Définir le contenu des pages à mettre à jour dans la table "pages"
     $pagesData = [
         [
             'titre' => 'Prendre RDV',
@@ -845,19 +851,24 @@ Medicare collabore avec les principaux médias nationaux et internationaux pour 
         ],
     ];
     
+    // Mettre à jour chaque page dans la base de données
     foreach ($pagesData as $page) {
         $stmt = $conn->prepare('UPDATE pages SET contenu = ? WHERE titre = ?');
+        // Associer les paramètres contenus et titre à la requête préparée
         $stmt->bind_param('ss', $page['contenu'], $page['titre']);
         $stmt->execute();
         $stmt->close();
     }
     
+    // Afficher une confirmation et proposer des liens de navigation
     echo "✅ Toutes les pages ont été mises à jour avec du contenu riche et détaillé!<br>";
     echo "<a href='manage_content.php'>Voir les pages →</a><br>";
     echo "<a href='patient.php'>Voir en tant que patient →</a>";
     
+    // Fermer la connexion à la base de données
     $conn->close();
 } catch (Exception $e) {
+    // Afficher l'erreur en cas d'exception
     echo "❌ Erreur: " . $e->getMessage();
 }
 ?>
