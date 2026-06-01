@@ -14,6 +14,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'patient') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mon espace patient — Hôpital Medicare</title>
     <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="global.css">
 </head>
 <body>
     <header class="header">
@@ -174,5 +175,6 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'patient') {
             <span>Confidentialité et protection des données</span>
         </div>
     </footer>
+  <script src="main.js" defer></script>
 </body>
 </html>

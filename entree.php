@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bienvenue - Hôpital Medicare</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="global.css">
 </head>
 <body>
     <div class="container">
@@ -12,6 +13,7 @@
         <p>Votre santé est notre priorité. Connectez-vous pour accéder à votre espace personnel.</p>
         <button onclick="window.location.href='login.php'">Se connecter</button>
     </div>
+  <script src="main.js" defer></script>
 </body>
 </html></content>
 <parameter name="filePath">c:\xampp\htdocs\Mon projet hopital\entree.php

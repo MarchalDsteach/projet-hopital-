@@ -33,6 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['search_slot'])) {
   <meta charset="UTF-8">
   <title>Plateforme hospitalière — Hôpital Medicare</title>
   <link rel="stylesheet" href="home.css">
+  <link rel="stylesheet" href="global.css">
 </head>
 <body>
   <header class="header">
@@ -287,5 +288,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['search_slot'])) {
       <span>HAS Certifié · APHP Partenaire · ISO 27001</span>
     </div>
   </footer>
+  <script src="main.js" defer></script>
 </body>
 </html>

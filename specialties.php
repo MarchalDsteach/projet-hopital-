@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Spécialités — Hôpital Medicare</title>
   <link rel="stylesheet" href="home.css">
+  <link rel="stylesheet" href="global.css">
 </head>
 <body>
   <header class="header">
@@ -78,5 +79,6 @@
       <span>© 2026 Hôpital Medicare</span>
     </div>
   </footer>
+  <script src="main.js" defer></script>
 </body>
 </html>

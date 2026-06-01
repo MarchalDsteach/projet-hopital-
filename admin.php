@@ -22,6 +22,7 @@ if ($_SESSION['role'] !== 'admin') {
 <title>Administration — Hôpital Medicare</title>
 <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="admin_hopital_medicare.css">
+<link rel="stylesheet" href="global.css">
 </head>
 <body>
 
@@ -743,6 +744,7 @@ function toggleSwitch(el) {
   }
 }
 </script>
+  <script src="main.js" defer></script>
 
 </body>
 </html>

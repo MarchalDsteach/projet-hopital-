@@ -1,0 +1,172 @@
+.hopital-reveal-hidden {
+  opacity: 0;
+  transform: translateY(26px) scale(0.98);
+}
+
+.hopital-reveal-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.hopital-theme-switcher {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
+  padding: 12px 18px;
+  border-radius: 999px;
+  border: none;
+  background: #0056b3;
+  color: #ffffff;
+  cursor: pointer;
+  font-weight: 700;
+  box-shadow: 0 18px 40px rgba(0, 86, 179, 0.24);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+}
+
+.hopital-theme-switcher:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 22px 48px rgba(0, 86, 179, 0.28);
+}
+
+.hopital-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  transform: translateX(-50%) translateY(24px);
+  background: rgba(15, 23, 42, 0.94);
+  color: #f8fbff;
+  padding: 14px 22px;
+  border-radius: 999px;
+  box-shadow: 0 28px 56px rgba(0, 0, 0, 0.24);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  z-index: 99999;
+  font-size: 0.95rem;
+}
+
+.hopital-toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+body.dark-mode,
+.dark-mode body {
+  background: #07121f !important;
+  color: #e8eff9 !important;
+}
+
+body.dark-mode a,
+.dark-mode a {
+  color: #8ab4ff !important;
+}
+
+body.dark-mode .header,
+body.dark-mode .footer,
+body.dark-mode .card,
+body.dark-mode .hero,
+body.dark-mode .rdv,
+body.dark-mode .expertises,
+body.dark-mode .news,
+body.dark-mode .espace-patient,
+body.dark-mode .footer-block,
+body.dark-mode .profile-card,
+body.dark-mode .contact-card,
+body.dark-mode .sidebar,
+body.dark-mode .topbar,
+body.dark-mode .main,
+body.dark-mode .content,
+body.dark-mode .kpi,
+body.dark-mode .slot,
+body.dark-mode .activity-item,
+body.dark-mode .chart-placeholder,
+body.dark-mode .modal,
+body.dark-mode .form-input {
+  background: rgba(8, 18, 33, 0.96) !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.22) !important;
+}
+
+body.dark-mode .card,
+body.dark-mode .news-item,
+body.dark-mode .modal,
+body.dark-mode .profile-card,
+body.dark-mode .contact-card,
+body.dark-mode .kpi,
+body.dark-mode .slot,
+body.dark-mode .activity-item,
+body.dark-mode .chart-placeholder {
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+body.dark-mode .hero h1,
+body.dark-mode .hero p,
+body.dark-mode .footer-bottom,
+body.dark-mode .subtitle,
+body.dark-mode .stat-label,
+body.dark-mode .tag,
+body.dark-mode .date,
+body.dark-mode .footer-block a,
+body.dark-mode .profile-card p,
+body.dark-mode .contact-card p,
+body.dark-mode .topbar-title,
+body.dark-mode .kpi-value,
+body.dark-mode .slot-name,
+body.dark-mode .act-text,
+body.dark-mode .stat-bar-label span:first-child,
+body.dark-mode .filter-label,
+body.dark-mode .form-label,
+body.dark-mode .section-h {
+  color: #dbe7fb !important;
+}
+
+body.dark-mode .btn.primary,
+body.dark-mode .btn-primary {
+  background: linear-gradient(135deg, #1765d4, #0b4da0) !important;
+  color: #ffffff !important;
+}
+
+body.dark-mode .btn.secondary,
+body.dark-mode .btn-secondary,
+body.dark-mode .btn-ghost {
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: #d5e6ff !important;
+  border-color: rgba(255, 255, 255, 0.16) !important;
+}
+
+body.dark-mode .btn-cancel,
+body.dark-mode .btn-sm,
+body.dark-mode .icon-btn {
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: #d5e6ff !important;
+  border-color: rgba(255, 255, 255, 0.16) !important;
+}
+
+body.dark-mode input,
+body.dark-mode select,
+body.dark-mode textarea,
+body.dark-mode .form-input {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border-color: rgba(255, 255, 255, 0.14) !important;
+  color: #e8eff9 !important;
+}
+
+body.dark-mode input::placeholder,
+body.dark-mode textarea::placeholder {
+  color: rgba(232, 239, 249, 0.64) !important;
+}
+
+body.dark-mode .badge,
+body.dark-mode .badge-urgences,
+body.dark-mode .tag.innovation,
+body.dark-mode .tag.recherche,
+body.dark-mode .tag.communique,
+body.dark-mode .tag.formation {
+  background: rgba(255, 255, 255, 0.08) !important;
+}
+
+body.dark-mode .main-nav a.active {
+  background: #0b4da0 !important;
+}

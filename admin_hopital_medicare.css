@@ -219,3 +219,5 @@ tr:hover td{background:#FAFCFE}
 .chart-placeholder{height:160px;background:linear-gradient(135deg,var(--blue-light) 0%,white 100%);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:13px;position:relative;overflow:hidden}
 .chart-bars{display:flex;align-items:flex-end;gap:5px;height:120px;padding:0 1rem;position:absolute;bottom:16px;left:0;right:0}
 .chart-bar{flex:1;border-radius:4px 4px 0 0;min-width:8px}
+
+/* Hopital enhancements */

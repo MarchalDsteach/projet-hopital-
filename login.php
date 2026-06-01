@@ -106,6 +106,7 @@ $conn->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Connexion - Hôpital Medicare</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="global.css">
     <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
 <body>
@@ -232,5 +233,6 @@ $conn->close();
             });
         }
     </script>
+    <script src="main.js" defer></script>
 </body>
 </html>

@@ -13,6 +13,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'autre') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Autre - Hôpital Medicare</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="global.css">
 </head>
 <body>
     <div class="container">
@@ -22,5 +23,6 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'autre') {
         <!-- Ajouter des fonctionnalités ici -->
         <a href="logout.php">Se déconnecter</a>
     </div>
+  <script src="main.js" defer></script>
 </body>
 </html>
