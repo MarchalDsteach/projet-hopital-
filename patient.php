@@ -96,6 +96,18 @@ $conn->close();
         </article>
     </section>
 
+    <section class="service-menu" id="services-list" style="margin: 30px 0; padding: 20px; background: #fff; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+        <h2>Nos services patients</h2>
+        <p style="color: #555;">Cliquez sur un service pour afficher les informations détaillées.</p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-top: 20px;">
+            <?php foreach ($pages as $page): ?>
+                <a href="patient.php?page=<?php echo $page['id']; ?>#services" style="display: block; padding: 14px 16px; background: #f7f9ff; border-radius: 10px; color: #1a3f82; text-decoration: none; border: 1px solid #dde6f2; transition: transform .2s;">
+                    <strong><?php echo html_escape($page['titre']); ?></strong>
+                </a>
+            <?php endforeach; ?>
+        </div>
+    </section>
+
     <section class="expertises" id="services">
         <h2>📋 Services & Informations</h2>
         <p class="subtitle">Découvrez les services de l'hôpital Medicare</p>
