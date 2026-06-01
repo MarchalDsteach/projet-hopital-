@@ -221,10 +221,12 @@ if ($conn instanceof mysqli) {
                 console.log('Google login response', data);
                 if (data.success) {
                     if (data.redirect) {
+                        console.log('Redirecting to', data.redirect);
                         window.location.href = data.redirect;
                         return;
                     }
                     const role = String(data.role || '').trim().toLowerCase();
+                    displayGoogleMessage('Aucune redirection fournie, rôle détecté : ' + role + '. Vérifiez la console.', true);
                     if (role === 'admin') {
                         window.location.href = 'admin.php';
                     } else {
