@@ -207,40 +207,34 @@ if ($conn instanceof mysqli) {
             }
         }
 
-        function handleGoogleSignIn(response) {
-            // Send the JWT token to the server for verification
-            fetch('google_login.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ token: response.credential })
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log('Google login response', data);
-                if (data.success) {
-                    if (data.redirect) {
-                        console.log('Redirecting to', data.redirect);
-                        window.location.href = data.redirect;
-                        return;
-                    }
-                    const role = String(data.role || '').trim().toLowerCase();
-                    displayGoogleMessage('Aucune redirection fournie, rôle détecté : ' + role + '. Vérifiez la console.', true);
-                    if (role === 'admin') {
-                        window.location.href = 'admin.php';
-                    } else {
-                        window.location.href = 'patient.php';
-                    }
-                } else {
-                    displayGoogleMessage('Erreur de connexion Google: ' + data.message, true);
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                displayGoogleMessage('Erreur lors de la connexion Google. Veuillez réessayer.', true);
-            });
+        function handleCredentialResponse(response) {
+    // 1. On envoie le jeton de connexion (credential) reçu de Google à ton script PHP
+    fetch('google_login.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ token: response.credential })
+    })
+    .then(res => res.json()) // On convertit la réponse du PHP en objet JavaScript
+    .then(data => {
+        // 2. Si le PHP confirme que la session est ouverte avec succès
+        if (data.success) {
+            // On redirige dynamiquement selon le rôle de l'utilisateur
+            if (data.role === 'admin') {
+                window.location.href = 'home.php'; // Ta page d'administration
+            } else {
+                window.location.href = 'patient.php'; // Ta page patient
+            }
+        } else {
+            // Si le script PHP rencontre une erreur (ex: problème de base de données)
+            alert("Erreur d'authentification : " + data.message);
         }
+    })
+    .catch(error => {
+        console.error("Erreur lors de la communication avec le serveur :", error);
+    });
+}
 
         function displayGoogleMessage(message, isError = true) {
             const messageBox = document.getElementById('googleMessage');
