@@ -5,6 +5,33 @@ secure_session_start();
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'patient') {
     safe_redirect('login.php');
 }
+
+// Récupérer les pages dynamiques
+$conn = get_db_connection();
+$pages = [];
+$selectedPage = null;
+
+$result = $conn->query('SELECT * FROM pages WHERE actif = 1 ORDER BY ordre ASC');
+if ($result) {
+    while ($row = $result->fetch_assoc()) {
+        $pages[] = $row;
+    }
+}
+
+// Si une page est sélectionnée, la récupérer
+$pageId = isset($_GET['page']) ? intval($_GET['page']) : null;
+if ($pageId) {
+    $stmt = $conn->prepare('SELECT * FROM pages WHERE id = ? AND actif = 1');
+    $stmt->bind_param('i', $pageId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    if ($result->num_rows > 0) {
+        $selectedPage = $result->fetch_assoc();
+    }
+    $stmt->close();
+}
+
+$conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -69,23 +96,31 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'patient') {
         </article>
     </section>
 
-    <section class="expertises" id="mes-rdv">
-        <h2>Mes rendez-vous</h2>
-        <p class="subtitle">Planifiez et gérez vos consultations</p>
-        <div class="cards">
-            <article class="card">
-                <h3>Consultation cardiologie</h3>
-                <p>Le 28 mai 2026 à 14h00 avec le Dr Dupont</p>
-            </article>
-            <article class="card">
-                <h3>Examen radiologie</h3>
-                <p>Le 3 juin 2026 à 10h30, service imagerie</p>
-            </article>
-            <article class="card">
-                <h3>Suivi infirmier</h3>
-                <p>Le 12 juin 2026 à 09h00, prise de tension et bilan</p>
-            </article>
-        </div>
+    <section class="expertises" id="services">
+        <h2>📋 Services & Informations</h2>
+        <p class="subtitle">Découvrez les services de l'hôpital Medicare</p>
+        
+        <?php if ($selectedPage): ?>
+            <!-- Affichage d'une page sélectionnée -->
+            <div class="page-detail" style="background: white; padding: 30px; border-radius: 8px; margin: 20px 0; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                <a href="patient.php#services" style="color: #007bff; text-decoration: none; margin-bottom: 15px; display: inline-block;">← Retour à la liste</a>
+                <h3 style="margin: 15px 0; color: #333;"><?php echo html_escape($selectedPage['titre']); ?></h3>
+                <div style="line-height: 1.8; color: #555; margin-top: 20px;">
+                    <?php echo nl2br(html_escape($selectedPage['contenu'])); ?>
+                </div>
+            </div>
+        <?php else: ?>
+            <!-- Affichage de la liste des pages -->
+            <div class="cards">
+                <?php foreach ($pages as $page): ?>
+                    <article class="card">
+                        <h3><?php echo html_escape($page['titre']); ?></h3>
+                        <p><?php echo substr(html_escape($page['contenu']), 0, 100); ?>...</p>
+                        <a href="patient.php?page=<?php echo $page['id']; ?>#services" style="color: #007bff; text-decoration: none; font-weight: bold;">Lire la suite →</a>
+                    </article>
+                <?php endforeach; ?>
+            </div>
+        <?php endif; ?>
     </section>
 
     <section class="news" id="mes-resultats">
