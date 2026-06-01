@@ -1,84 +1,97 @@
 <?php
-session_start();
-
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
-
+require_once 'config.php';
+secure_session_start();
 header('Content-Type: application/json');
 
-$conn = new mysqli("localhost", "root", "", "hopital");
-
-if ($conn->connect_error) {
-    echo json_encode(['success' => false, 'message' => 'Erreur de connexion DB']);
+try {
+    $conn = get_db_connection();
+} catch (RuntimeException $e) {
+    echo json_encode(['success' => false, 'message' => 'Erreur interne.']);
     exit();
 }
 
 $adminEmails = ['admin@hopital-foch.org', 'engambejude@gmail.com'];
 
-//  Vérification token Google
-function verifyGoogleToken($token) {
-    $client_id = '989221879491-ldu7ab5ikrsn0v737itkru6ek9m57bbk.apps.googleusercontent.com'; 
-
-    $url = 'https://oauth2.googleapis.com/tokeninfo?id_token=' . $token;
+function verifyGoogleToken(string $token) {
+    $client_id = GOOGLE_CLIENT_ID;
+    $url = 'https://oauth2.googleapis.com/tokeninfo?id_token=' . rawurlencode($token);
     $response = @file_get_contents($url);
-    if ($response === false) return false;
+    if ($response === false) {
+        return false;
+    }
 
     $payload = json_decode($response, true);
-    if (!$payload || isset($payload['error'])) return false;
+    if (!$payload || isset($payload['error'])) {
+        return false;
+    }
 
-    // Vérifications importantes
-    if (!isset($payload['sub'])) return false;
-    if ($payload['aud'] !== $client_id) return false;
-    if (!isset($payload['email_verified']) || $payload['email_verified'] !== "true") return false;
-    if (!isset($payload['iss']) || ($payload['iss'] !== 'accounts.google.com' && $payload['iss'] !== 'https://accounts.google.com')) return false;
+    if (empty($payload['sub']) || empty($payload['email']) || empty($payload['aud']) || empty($payload['iss'])) {
+        return false;
+    }
+    if ($payload['aud'] !== $client_id) {
+        return false;
+    }
+    if ($payload['iss'] !== 'accounts.google.com' && $payload['iss'] !== 'https://accounts.google.com') {
+        return false;
+    }
+    if (!isset($payload['email_verified']) || $payload['email_verified'] !== 'true') {
+        return false;
+    }
 
     return $payload;
 }
 
-// Récupération des données envoyées depuis le front
 $data = json_decode(file_get_contents('php://input'), true);
-if (!isset($data['token'])) {
-    echo json_encode(['success' => false, 'message' => 'Token manquant']);
+$token = $data['token'] ?? '';
+if (!is_string($token) || $token === '') {
+    echo json_encode(['success' => false, 'message' => 'Token manquant.']);
     exit();
 }
 
-// Vérification du token
-$payload = verifyGoogleToken($data['token']);
-if (!$payload || !isset($payload['email'])) {
-    echo json_encode(['success' => false, 'message' => 'Token invalide']);
+$payload = verifyGoogleToken($token);
+if (!$payload || empty($payload['email'])) {
+    echo json_encode(['success' => false, 'message' => 'Token invalide.']);
     exit();
 }
 
-// Récupération des infos Google
-$email = $payload['email'];
-$nom = $payload['family_name'] ?? '';
-$prenom = $payload['given_name'] ?? '';
-$google_id = $payload['sub'];
+$email = filter_var($payload['email'], FILTER_VALIDATE_EMAIL);
+if (!$email) {
+    echo json_encode(['success' => false, 'message' => 'Adresse email invalide.']);
+    exit();
+}
 
-//  Vérifier si utilisateur existe
-$stmt = $conn->prepare("SELECT id, nom, prenom, role, google_id FROM utilisateurs WHERE email = ?");
-$stmt->bind_param("s", $email);
+$nom = trim($payload['family_name'] ?? '');
+$prenom = trim($payload['given_name'] ?? '');
+$google_id = trim($payload['sub'] ?? '');
+
+if ($google_id === '') {
+    echo json_encode(['success' => false, 'message' => 'Token invalide.']);
+    exit();
+}
+
+$stmt = $conn->prepare('SELECT id, nom, prenom, role, google_id FROM utilisateurs WHERE email = ?');
+$stmt->bind_param('s', $email);
 $stmt->execute();
 $result = $stmt->get_result();
 
-if ($result->num_rows > 0) {
+if ($result && $result->num_rows > 0) {
     $user = $result->fetch_assoc();
 
-    // Lier le compte à Google si nécessaire
     if (empty($user['google_id'])) {
-        $update = $conn->prepare("UPDATE utilisateurs SET google_id = ? WHERE id = ?");
-        $update->bind_param("si", $google_id, $user['id']);
+        $update = $conn->prepare('UPDATE utilisateurs SET google_id = ? WHERE id = ?');
+        $update->bind_param('si', $google_id, $user['id']);
         $update->execute();
+        $update->close();
     }
 
     if (in_array($email, $adminEmails, true) && $user['role'] !== 'admin') {
         $user['role'] = 'admin';
-        $updateRole = $conn->prepare("UPDATE utilisateurs SET role = ? WHERE id = ?");
-        $updateRole->bind_param("si", $user['role'], $user['id']);
+        $updateRole = $conn->prepare('UPDATE utilisateurs SET role = ? WHERE id = ?');
+        $updateRole->bind_param('si', $user['role'], $user['id']);
         $updateRole->execute();
+        $updateRole->close();
     }
 
-    // Création de la session
     $_SESSION['user_id'] = $user['id'];
     $_SESSION['role'] = $user['role'];
     $_SESSION['nom'] = $user['nom'];
@@ -87,26 +100,23 @@ if ($result->num_rows > 0) {
 
     echo json_encode(['success' => true, 'role' => $user['role']]);
     exit();
+}
 
-} else {
-    // Création automatique d’un utilisateur patient ou admin selon l'email
-    $role = in_array($email, $adminEmails, true) ? 'admin' : 'patient';
-    $insert = $conn->prepare("INSERT INTO utilisateurs (email, nom, prenom, role, google_id) VALUES (?, ?, ?, ?, ?)");
-    $insert->bind_param("sssss", $email, $nom, $prenom, $role, $google_id);
-    if (!$insert->execute()) {
-        echo json_encode(['success' => false, 'message' => 'Erreur insertion utilisateur']);
-        exit();
-    }
-
-    $_SESSION['user_id'] = $conn->insert_id;
-    $_SESSION['role'] = $role;
-    $_SESSION['nom'] = $nom;
-    $_SESSION['prenom'] = $prenom;
-    session_regenerate_id(true);
-
-    echo json_encode(['success' => true, 'role' => $role]);
+$role = in_array($email, $adminEmails, true) ? 'admin' : 'patient';
+$insert = $conn->prepare('INSERT INTO utilisateurs (email, nom, prenom, role, google_id) VALUES (?, ?, ?, ?, ?)');
+$insert->bind_param('sssss', $email, $nom, $prenom, $role, $google_id);
+if (!$insert->execute()) {
+    echo json_encode(['success' => false, 'message' => 'Erreur interne.']);
     exit();
 }
 
+$_SESSION['user_id'] = $conn->insert_id;
+$_SESSION['role'] = $role;
+$_SESSION['nom'] = $nom;
+$_SESSION['prenom'] = $prenom;
+session_regenerate_id(true);
+
+echo json_encode(['success' => true, 'role' => $role]);
 $conn->close();
+exit();
 ?>

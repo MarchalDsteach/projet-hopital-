@@ -1,8 +1,8 @@
 <?php
-session_start();
+require_once 'config.php';
+secure_session_start();
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'utilisateur') {
-    header("Location: login.php");
-    exit();
+    safe_redirect('login.php');
 }
 ?>
 

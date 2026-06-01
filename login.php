@@ -1,102 +1,106 @@
 <?php
-session_start();
-session_regenerate_id(true);
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-// Connexion à la base de données
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "hopital";
+require_once 'config.php';
+secure_session_start();
 
 $error = null;
 $success = null;
 
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Connexion échouée: " . $conn->connect_error);
+try {
+    $conn = get_db_connection();
+} catch (RuntimeException $e) {
+    $error = 'Erreur interne. Veuillez réessayer plus tard.';
+    $conn = null;
 }
 
+$csrf_token = generate_csrf_token();
 
-// Traitement du formulaire de connexion
-if (isset($_POST['login'])) {
-    $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
-
-    $stmt = $conn->prepare("SELECT id, role, nom, prenom, password_hash FROM utilisateurs WHERE email = ?");
-    $stmt->bind_param("s", $email);
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    if ($result->num_rows > 0) {
-        $user = $result->fetch_assoc();
-
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $submittedToken = $_POST['csrf_token'] ?? '';
+    if (!verify_csrf_token($submittedToken)) {
+        $error = 'Requête invalide. Rechargez la page et réessayez.';
+    } elseif (isset($_POST['login'])) {
+        $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
         $mot_de_passe = $_POST['mot_de_passe'] ?? '';
 
-if (!password_verify($mot_de_passe, $user['password_hash'])) {
-            $error = "Mot de passe incorrect.";
-        } else {
-            $_SESSION['user_id'] = $user['id'];
-            $_SESSION['role'] = $user['role'];
-            $_SESSION['nom'] = $user['nom'];
-            $_SESSION['prenom'] = $user['prenom'];
+        if (!$email || empty($mot_de_passe)) {
+            $error = 'Email ou mot de passe invalide.';
+        } elseif ($conn) {
+            $stmt = $conn->prepare('SELECT id, role, nom, prenom, password_hash FROM utilisateurs WHERE email = ?');
+            $stmt->bind_param('s', $email);
+            $stmt->execute();
+            $result = $stmt->get_result();
 
-            $redirectPage = $user['role'] . '.php';
-            if (!file_exists($redirectPage)) {
-                $redirectPage = 'home.php';
+            if ($result && $result->num_rows === 1) {
+                $user = $result->fetch_assoc();
+                if (!password_verify($mot_de_passe, $user['password_hash'])) {
+                    $error = 'Email ou mot de passe incorrect.';
+                } else {
+                    $_SESSION['user_id'] = $user['id'];
+                    $_SESSION['role'] = $user['role'];
+                    $_SESSION['nom'] = $user['nom'];
+                    $_SESSION['prenom'] = $user['prenom'];
+                    session_regenerate_id(true);
+
+                    $redirectPage = $user['role'] . '.php';
+                    if (!file_exists($redirectPage)) {
+                        $redirectPage = 'home.php';
+                    }
+                    safe_redirect($redirectPage);
+                }
+            } else {
+                $error = 'Email ou mot de passe incorrect.';
             }
-            header("Location: " . $redirectPage);
-            exit();
+
+            $stmt->close();
         }
-    } else {
-        $error = "Utilisateur introuvable.";
-    }
+    } elseif (isset($_POST['register'])) {
+        $email = filter_input(INPUT_POST, 'email_reg', FILTER_VALIDATE_EMAIL);
+        $mot_de_passe_raw = $_POST['mot_de_passe_reg'] ?? '';
+        $nom = trim($_POST['nom'] ?? '');
+        $prenom = trim($_POST['prenom'] ?? '');
+        $role = 'patient';
 
-    $stmt->close();
-}
-// Traitement du formulaire d'inscription
-if (isset($_POST['register'])) {
-    $email = filter_var($_POST['email_reg'], FILTER_SANITIZE_EMAIL);
-    $mot_de_passe = password_hash($_POST['mot_de_passe_reg'], PASSWORD_DEFAULT);
-    $role = "patient"; //  on force ici
-    $nom = htmlspecialchars($_POST['nom']);
-    $prenom = htmlspecialchars($_POST['prenom']);
+        if (!$email || empty($mot_de_passe_raw) || empty($nom) || empty($prenom)) {
+            $error = 'Veuillez remplir tous les champs.';
+        } elseif (strlen($mot_de_passe_raw) < 8) {
+            $error = 'Le mot de passe doit contenir au moins 8 caractères.';
+        } elseif (!preg_match('/^[\p{L} \-\']+$/u', $nom) || !preg_match('/^[\p{L} \-\']+$/u', $prenom)) {
+            $error = 'Nom ou prénom invalide.';
+        } elseif ($conn) {
+            $password_hash = password_hash($mot_de_passe_raw, PASSWORD_DEFAULT);
+            $nom = html_escape($nom);
+            $prenom = html_escape($prenom);
 
-    //  Vérification des champs
-    if (empty($email) || empty($_POST['mot_de_passe_reg']) || empty($nom) || empty($prenom)) {
-        $error = "Veuillez remplir tous les champs";
-    } else {
-        //  ATTENTION : utilisateurs (avec S)
-        $stmt = $conn->prepare("INSERT INTO utilisateurs (email, password_hash, role, nom, prenom) VALUES (?, ?, ?, ?, ?)");
-        $stmt->bind_param("sssss", $email, $mot_de_passe, $role, $nom, $prenom);
+            $stmt = $conn->prepare('INSERT INTO utilisateurs (email, password_hash, role, nom, prenom) VALUES (?, ?, ?, ?, ?)');
+            $stmt->bind_param('sssss', $email, $password_hash, $role, $nom, $prenom);
 
-        if ($stmt->execute()) {
-            // Connexion automatique et redirection
-            $stmt_login = $conn->prepare("SELECT id, role, nom, prenom FROM utilisateurs WHERE email = ?");
-            $stmt_login->bind_param("s", $email);
-            $stmt_login->execute();
-            $result_login = $stmt_login->get_result();
-            $user = $result_login->fetch_assoc();
-            
-            $_SESSION['user_id'] = $user['id'];
-            $_SESSION['role'] = $user['role'];
-            $_SESSION['nom'] = $user['nom'];
-            $_SESSION['prenom'] = $user['prenom'];
-            
-            $stmt_login->close();
-            
-            header("Location: patient.php");
-            exit();
-        } else {
-            $error = "Email déjà utilisé.";
+            if ($stmt->execute()) {
+                $stmt_login = $conn->prepare('SELECT id, role, nom, prenom FROM utilisateurs WHERE email = ?');
+                $stmt_login->bind_param('s', $email);
+                $stmt_login->execute();
+                $result_login = $stmt_login->get_result();
+                $user = $result_login->fetch_assoc();
+
+                $_SESSION['user_id'] = $user['id'];
+                $_SESSION['role'] = $user['role'];
+                $_SESSION['nom'] = $user['nom'];
+                $_SESSION['prenom'] = $user['prenom'];
+                session_regenerate_id(true);
+
+                $stmt_login->close();
+                safe_redirect('patient.php');
+            } else {
+                $error = 'Impossible de créer ce compte. Vérifiez vos informations.';
+            }
+
+            $stmt->close();
         }
-
-        $stmt->close();
     }
 }
 
-$conn->close();
+if ($conn instanceof mysqli) {
+    $conn->close();
+}
 ?>
 
 <!DOCTYPE html>
@@ -129,6 +133,7 @@ $conn->close();
         </div>
 
         <form id="login" method="post">
+            <input type="hidden" name="csrf_token" value="<?php echo html_escape($csrf_token); ?>">
             <input type="email" name="email" placeholder="Email" required>
             <input type="password" name="mot_de_passe" placeholder="Mot de passe" required>
             <button type="submit" name="login">Se connecter</button>
@@ -147,6 +152,7 @@ $conn->close();
             <h2>Créer un nouveau compte</h2>
             
             <form id="register" method="post">
+                <input type="hidden" name="csrf_token" value="<?php echo html_escape($csrf_token); ?>">
                 <label for="nom">Nom</label>
                 <input type="text" id="nom" name="nom" placeholder="Votre nom" required>
                 

@@ -1,15 +1,14 @@
 <?php
-session_start();
+require_once 'config.php';
+secure_session_start();
 //  pas connecté
 if (!isset($_SESSION['user_id'])) {
-    header("Location: index.php");
-    exit();
+    safe_redirect('index.php');
 }
 
 //  pas admin
 if ($_SESSION['role'] !== 'admin') {
-    header("Location: patient.php");
-    exit();
+    safe_redirect('patient.php');
 }
 ?>
 
