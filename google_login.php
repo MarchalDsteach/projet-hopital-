@@ -52,7 +52,7 @@ if (!$payload || empty($payload['email'])) {
     exit();
 }
 
-$email = filter_var(trim(strtolower($payload['email'] ?? '')), FILTER_VALIDATE_EMAIL);
+$email = normalize_email($payload['email'] ?? '');
 if (!$email) {
     echo json_encode(['success' => false, 'message' => 'Adresse email invalide.']);
     exit();

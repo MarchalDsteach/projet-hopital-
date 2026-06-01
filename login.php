@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!verify_csrf_token($submittedToken)) {
         $error = 'Requête invalide. Rechargez la page et réessayez.';
     } elseif (isset($_POST['login'])) {
-        $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
+        $email = normalize_email($_POST['email'] ?? '');
         $mot_de_passe = $_POST['mot_de_passe'] ?? '';
 
         if (!$email || empty($mot_de_passe)) {
@@ -62,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt->close();
         }
     } elseif (isset($_POST['register'])) {
-        $email = filter_input(INPUT_POST, 'email_reg', FILTER_VALIDATE_EMAIL);
+        $email = normalize_email($_POST['email_reg'] ?? '');
         $mot_de_passe_raw = $_POST['mot_de_passe_reg'] ?? '';
         $nom = trim($_POST['nom'] ?? '');
         $prenom = trim($_POST['prenom'] ?? '');
