@@ -11,7 +11,7 @@ define('DB_NAME', 'hopital');
 
 define('GOOGLE_CLIENT_ID', '989221879491-ldu7ab5ikrsn0v737itkru6ek9m57bbk.apps.googleusercontent.com');
 
-define('ADMIN_EMAILS', serialize(['admin@hopital-foch.org', 'engambejude@gmail.com']));
+define('ADMIN_EMAILS', serialize(['engambejude@gmail.com']));
 
 define('SECURE_SESSION_NAME', 'hopital_session');
 

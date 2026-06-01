@@ -568,7 +568,7 @@ if ($_SESSION['role'] !== 'admin') {
       <table>
         <thead><tr><th>Nom</th><th>Email</th><th>Rôle</th><th>Dernière connexion</th><th>Actions</th></tr></thead>
         <tbody>
-          <tr><td><strong>Administrateur Principal</strong></td><td>admin@hopital-foch.org</td><td><span class="badge badge-red">Super Admin</span></td><td>Aujourd'hui 09h12</td><td><button class="btn-sm">✏️</button></td></tr>
+          <tr><td><strong>Administrateur Principal</strong></td><td>engambejude@gmail.com</td><td><span class="badge badge-red">Super Admin</span></td><td>Aujourd'hui 09h12</td><td><button class="btn-sm">✏️</button></td></tr>
           <tr><td><strong>Martin Delphine</strong></td><td>d.martin@hopital-foch.org</td><td><span class="badge badge-blue">Admin RDV</span></td><td>Hier 17h30</td><td><button class="btn-sm">✏️</button><button class="btn-sm">🗑️</button></td></tr>
           <tr><td><strong>Durand Olivier</strong></td><td>o.durand@hopital-foch.org</td><td><span class="badge badge-orange">Admin Contenu</span></td><td>06 mai 2026</td><td><button class="btn-sm">✏️</button><button class="btn-sm">🗑️</button></td></tr>
         </tbody>
