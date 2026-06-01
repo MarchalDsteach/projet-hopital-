@@ -29,7 +29,7 @@ function send_security_headers(): void {
     header('Referrer-Policy: no-referrer-when-downgrade');
     header('Permissions-Policy: geolocation=(), microphone=(), camera=()');
     header('X-XSS-Protection: 1; mode=block');
-    header("Content-Security-Policy: default-src 'self'; script-src 'self' https://accounts.google.com https://oauth2.googleapis.com; style-src 'self' 'unsafe-inline'; connect-src 'self' https://oauth2.googleapis.com; img-src 'self' data:; font-src 'self';");
+    header("Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://accounts.google.com https://oauth2.googleapis.com; style-src 'self' 'unsafe-inline' https://accounts.google.com; connect-src 'self' https://oauth2.googleapis.com https://accounts.google.com; img-src 'self' data: https:; font-src 'self' https://fonts.googleapis.com; frame-src https://accounts.google.com;");
 
     $https = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ||
              (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https');
