@@ -222,7 +222,7 @@ if ($conn instanceof mysqli) {
         if (data.success) {
             // On redirige dynamiquement selon le rôle de l'utilisateur
             if (data.role === 'admin') {
-                window.location.href = 'home.php'; // Ta page d'administration
+                window.location.href = 'admin.php'; // Ta page d'administration
             } else {
                 window.location.href = 'patient.php'; // Ta page patient
             }
