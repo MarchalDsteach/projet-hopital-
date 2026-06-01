@@ -35,6 +35,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 if (!password_verify($mot_de_passe, $user['password_hash'])) {
                     $error = 'Email ou mot de passe incorrect.';
                 } else {
+                    if (is_admin_email($email) && $user['role'] !== 'admin') {
+                        $user['role'] = 'admin';
+                        $updateRole = $conn->prepare('UPDATE utilisateurs SET role = ? WHERE id = ?');
+                        $updateRole->bind_param('si', $user['role'], $user['id']);
+                        $updateRole->execute();
+                        $updateRole->close();
+                    }
+
                     $_SESSION['user_id'] = $user['id'];
                     $_SESSION['role'] = $user['role'];
                     $_SESSION['nom'] = $user['nom'];
@@ -90,7 +98,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $stmt_login->close();
                 safe_redirect('patient.php');
             } else {
-                $error = 'Impossible de créer ce compte. Vérifiez vos informations.';
+                if ($stmt->errno === 1062) {
+                    $error = 'Ce compte existe déjà. Essayez de vous connecter.';
+                } else {
+                    $error = 'Impossible de créer ce compte. Vérifiez vos informations.';
+                }
             }
 
             $stmt->close();

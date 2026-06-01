@@ -10,9 +10,6 @@ try {
     exit();
 }
 
-$adminEmails = ['admin@hopital-foch.org', 'engambejude@gmail.com'];
-$adminEmailsLower = array_map('strtolower', $adminEmails);
-
 function verifyGoogleToken(string $token) {
     $client_id = GOOGLE_CLIENT_ID;
     $url = 'https://oauth2.googleapis.com/tokeninfo?id_token=' . rawurlencode($token);
@@ -85,7 +82,7 @@ if ($result && $result->num_rows > 0) {
         $update->close();
     }
 
-    if (in_array(strtolower($email), $adminEmailsLower, true) && $user['role'] !== 'admin') {
+    if (is_admin_email($email) && $user['role'] !== 'admin') {
         $user['role'] = 'admin';
         $updateRole = $conn->prepare('UPDATE utilisateurs SET role = ? WHERE id = ?');
         $updateRole->bind_param('si', $user['role'], $user['id']);
@@ -103,7 +100,7 @@ if ($result && $result->num_rows > 0) {
     exit();
 }
 
-$role = in_array($email, $adminEmailsLower, true) ? 'admin' : 'patient';
+$role = is_admin_email($email) ? 'admin' : 'patient';
 $insert = $conn->prepare('INSERT INTO utilisateurs (email, nom, prenom, role, google_id) VALUES (?, ?, ?, ?, ?)');
 $insert->bind_param('sssss', $email, $nom, $prenom, $role, $google_id);
 if (!$insert->execute()) {

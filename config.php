@@ -11,6 +11,8 @@ define('DB_NAME', 'hopital');
 
 define('GOOGLE_CLIENT_ID', '989221879491-ldu7ab5ikrsn0v737itkru6ek9m57bbk.apps.googleusercontent.com');
 
+define('ADMIN_EMAILS', serialize(['admin@hopital-foch.org', 'engambejude@gmail.com']));
+
 define('SECURE_SESSION_NAME', 'hopital_session');
 
 define('CSRF_TOKEN_KEY', 'csrf_token');
@@ -90,6 +92,16 @@ function get_db_connection(): mysqli {
 
 function html_escape(string $value): string {
     return htmlspecialchars($value, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+}
+
+function normalize_email(string $email): string {
+    return filter_var(trim(strtolower($email)), FILTER_VALIDATE_EMAIL) ?: '';
+}
+
+function is_admin_email(string $email): bool {
+    $email = normalize_email($email);
+    $adminEmails = unserialize(ADMIN_EMAILS, ['allowed_classes' => false]) ?: [];
+    return in_array($email, array_map('strtolower', $adminEmails), true);
 }
 
 function generate_csrf_token(): string {
