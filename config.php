@@ -48,6 +48,13 @@ function enforce_https(): void {
              (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https');
 
     if (!$https) {
+        $isJsonApi = stripos($_SERVER['CONTENT_TYPE'] ?? '', 'application/json') !== false;
+        $isAjax = isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest';
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' || $isJsonApi || $isAjax) {
+            return;
+        }
+
         $requestUri = $_SERVER['REQUEST_URI'] ?? '/';
         header('Location: https://' . $_SERVER['HTTP_HOST'] . $requestUri, true, 301);
         exit();
