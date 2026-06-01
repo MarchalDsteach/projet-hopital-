@@ -429,7 +429,7 @@ Trimestre 3 (28-40 semaines):
 
 🏥 FACILITÉS DE NOTRE MATERNITÉ
 • 25 chambres individuelles avec vue
-• Chambres "peau-à-peau" après accouchement
+• Chambres \"peau-à-peau\" après accouchement
 • Salle de naissance équipée
 • Néonatalogie pédiatrique
 • Allaitement soutenu par lactation spécialisée
