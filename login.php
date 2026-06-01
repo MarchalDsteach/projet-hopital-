@@ -199,9 +199,11 @@ if ($conn instanceof mysqli) {
             })
             .then(response => response.json())
             .then(data => {
+                console.log('Google login response', data);
+                const role = String(data.role || '').trim().toLowerCase();
                 if (data.success) {
                     // Redirect based on role
-                    switch (data.role) {
+                    switch (role) {
                         case 'admin':
                             window.location.href = 'admin.php';
                             break;
@@ -227,7 +229,11 @@ if ($conn instanceof mysqli) {
                             window.location.href = 'accueil.php';
                             break;
                         default:
-                            window.location.href = 'autre.php';
+                            if (role === 'admin') {
+                                window.location.href = 'admin.php';
+                            } else {
+                                window.location.href = 'autre.php';
+                            }
                             break;
                     }
                 } else {

@@ -55,7 +55,7 @@ if (!$payload || empty($payload['email'])) {
     exit();
 }
 
-$email = filter_var($payload['email'], FILTER_VALIDATE_EMAIL);
+$email = filter_var(trim(strtolower($payload['email'] ?? '')), FILTER_VALIDATE_EMAIL);
 if (!$email) {
     echo json_encode(['success' => false, 'message' => 'Adresse email invalide.']);
     exit();
@@ -99,11 +99,11 @@ if ($result && $result->num_rows > 0) {
     $_SESSION['prenom'] = $user['prenom'];
     session_regenerate_id(true);
 
-    echo json_encode(['success' => true, 'role' => $user['role']]);
+    echo json_encode(['success' => true, 'role' => trim(strtolower($user['role']))]);
     exit();
 }
 
-$role = in_array(strtolower($email), $adminEmailsLower, true) ? 'admin' : 'patient';
+$role = in_array($email, $adminEmailsLower, true) ? 'admin' : 'patient';
 $insert = $conn->prepare('INSERT INTO utilisateurs (email, nom, prenom, role, google_id) VALUES (?, ?, ?, ?, ?)');
 $insert->bind_param('sssss', $email, $nom, $prenom, $role, $google_id);
 if (!$insert->execute()) {
@@ -117,7 +117,7 @@ $_SESSION['nom'] = $nom;
 $_SESSION['prenom'] = $prenom;
 session_regenerate_id(true);
 
-echo json_encode(['success' => true, 'role' => $role]);
+echo json_encode(['success' => true, 'role' => trim(strtolower($role))]);
 $conn->close();
 exit();
 ?>
