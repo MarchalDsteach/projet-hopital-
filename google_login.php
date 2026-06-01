@@ -11,6 +11,7 @@ try {
 }
 
 $adminEmails = ['admin@hopital-foch.org', 'engambejude@gmail.com'];
+$adminEmailsLower = array_map('strtolower', $adminEmails);
 
 function verifyGoogleToken(string $token) {
     $client_id = GOOGLE_CLIENT_ID;
@@ -34,7 +35,7 @@ function verifyGoogleToken(string $token) {
     if ($payload['iss'] !== 'accounts.google.com' && $payload['iss'] !== 'https://accounts.google.com') {
         return false;
     }
-    if (!isset($payload['email_verified']) || $payload['email_verified'] !== 'true') {
+    if (!isset($payload['email_verified']) || ($payload['email_verified'] !== 'true' && $payload['email_verified'] !== true)) {
         return false;
     }
 
@@ -84,7 +85,7 @@ if ($result && $result->num_rows > 0) {
         $update->close();
     }
 
-    if (in_array($email, $adminEmails, true) && $user['role'] !== 'admin') {
+    if (in_array(strtolower($email), $adminEmailsLower, true) && $user['role'] !== 'admin') {
         $user['role'] = 'admin';
         $updateRole = $conn->prepare('UPDATE utilisateurs SET role = ? WHERE id = ?');
         $updateRole->bind_param('si', $user['role'], $user['id']);
@@ -102,7 +103,7 @@ if ($result && $result->num_rows > 0) {
     exit();
 }
 
-$role = in_array($email, $adminEmails, true) ? 'admin' : 'patient';
+$role = in_array(strtolower($email), $adminEmailsLower, true) ? 'admin' : 'patient';
 $insert = $conn->prepare('INSERT INTO utilisateurs (email, nom, prenom, role, google_id) VALUES (?, ?, ?, ?, ?)');
 $insert->bind_param('sssss', $email, $nom, $prenom, $role, $google_id);
 if (!$insert->execute()) {

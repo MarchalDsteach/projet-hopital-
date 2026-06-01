@@ -52,6 +52,38 @@
   transform: translateX(-50%) translateY(0);
 }
 
+.message {
+  margin: 15px 0;
+  padding: 14px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  max-width: 520px;
+}
+
+.message.error {
+  background-color: #fdecea;
+  color: #b71c1c;
+  border: 1px solid #f5c6cb;
+}
+
+.message.success {
+  background-color: #e6ffed;
+  color: #1f7a1f;
+  border: 1px solid #b7debb;
+}
+
+body.dark-mode .message.error {
+  background-color: #3f1d1d;
+  color: #ffb3b3;
+  border-color: #7a3f3f;
+}
+
+body.dark-mode .message.success {
+  background-color: #1d3923;
+  color: #b3ffb3;
+  border-color: #3f7a46;
+}
+
 body.dark-mode,
 .dark-mode body {
   background: #07121f !important;

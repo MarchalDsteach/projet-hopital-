@@ -119,6 +119,7 @@ if ($conn instanceof mysqli) {
         
         <?php if (isset($error)) echo "<p class='error'>$error</p>"; ?>
         <?php if (isset($success)) echo "<p class='success'>$success</p>"; ?>
+        <div id="googleMessage" class="message" style="display:none;"></div>
 
         <div class="google-login">
             <div id="g_id_onload"
@@ -230,13 +231,24 @@ if ($conn instanceof mysqli) {
                             break;
                     }
                 } else {
-                    alert('Erreur de connexion Google: ' + data.message);
+                    displayGoogleMessage('Erreur de connexion Google: ' + data.message, true);
                 }
             })
             .catch(error => {
                 console.error('Error:', error);
-                alert('Erreur lors de la connexion Google');
+                displayGoogleMessage('Erreur lors de la connexion Google. Veuillez réessayer.', true);
             });
+        }
+
+        function displayGoogleMessage(message, isError = true) {
+            const messageBox = document.getElementById('googleMessage');
+            if (!messageBox) {
+                alert(message);
+                return;
+            }
+            messageBox.textContent = message;
+            messageBox.className = isError ? 'message error' : 'message success';
+            messageBox.style.display = 'block';
         }
     </script>
     <script src="main.js" defer></script>
