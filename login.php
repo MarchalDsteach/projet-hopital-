@@ -35,26 +35,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 if (!password_verify($mot_de_passe, $user['password_hash'])) {
                     $error = 'Email ou mot de passe incorrect.';
                 } else {
-                    if (is_admin_email($email) && $user['role'] !== 'admin') {
-                        $user['role'] = 'admin';
-                        $updateRole = $conn->prepare('UPDATE utilisateurs SET role = ? WHERE id = ?');
-                        $updateRole->bind_param('si', $user['role'], $user['id']);
-                        $updateRole->execute();
-                        $updateRole->close();
-                    }
+                        $isAdminEmail = is_admin_email($email);
+                        if ($isAdminEmail && $user['role'] !== 'admin') {
+                            $user['role'] = 'admin';
+                            $updateRole = $conn->prepare('UPDATE utilisateurs SET role = ? WHERE id = ?');
+                            $updateRole->bind_param('si', $user['role'], $user['id']);
+                            $updateRole->execute();
+                            $updateRole->close();
+                        } elseif (!$isAdminEmail && $user['role'] === 'admin') {
+                            $user['role'] = 'patient';
+                            $updateRole = $conn->prepare('UPDATE utilisateurs SET role = ? WHERE id = ?');
+                            $updateRole->bind_param('si', $user['role'], $user['id']);
+                            $updateRole->execute();
+                            $updateRole->close();
+                        }
 
-                    $_SESSION['user_id'] = $user['id'];
-                    $_SESSION['role'] = $user['role'];
-                    $_SESSION['nom'] = $user['nom'];
-                    $_SESSION['prenom'] = $user['prenom'];
-                    session_regenerate_id(true);
+                        $_SESSION['user_id'] = $user['id'];
+                        $_SESSION['role'] = $user['role'];
+                        $_SESSION['nom'] = $user['nom'];
+                        $_SESSION['prenom'] = $user['prenom'];
+                        session_regenerate_id(true);
 
-                    $redirectPage = $user['role'] . '.php';
-                    if (!file_exists($redirectPage)) {
-                        $redirectPage = 'home.php';
+                        $redirectPage = $user['role'] . '.php';
+                        if (!file_exists($redirectPage)) {
+                            $redirectPage = 'home.php';
+                        }
+                        safe_redirect($redirectPage);
                     }
-                    safe_redirect($redirectPage);
-                }
             } else {
                 $error = 'Email ou mot de passe incorrect.';
             }

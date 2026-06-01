@@ -82,8 +82,15 @@ if ($result && $result->num_rows > 0) {
         $update->close();
     }
 
-    if (is_admin_email($email) && $user['role'] !== 'admin') {
+    $isAdminEmail = is_admin_email($email);
+    if ($isAdminEmail && $user['role'] !== 'admin') {
         $user['role'] = 'admin';
+        $updateRole = $conn->prepare('UPDATE utilisateurs SET role = ? WHERE id = ?');
+        $updateRole->bind_param('si', $user['role'], $user['id']);
+        $updateRole->execute();
+        $updateRole->close();
+    } elseif (!$isAdminEmail && $user['role'] !== 'patient') {
+        $user['role'] = 'patient';
         $updateRole = $conn->prepare('UPDATE utilisateurs SET role = ? WHERE id = ?');
         $updateRole->bind_param('si', $user['role'], $user['id']);
         $updateRole->execute();
