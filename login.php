@@ -75,8 +75,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $prenom = trim($_POST['prenom'] ?? '');
         $role = 'patient';
 
+        // Debug
+        error_log('REGISTER ATTEMPT: email=' . $email . ', nom=' . $nom . ', prenom=' . $prenom);
+
         if (!$email || empty($mot_de_passe_raw) || empty($nom) || empty($prenom)) {
             $error = 'Veuillez remplir tous les champs.';
+            error_log('REGISTER ERROR: validation échouée - email=' . $email . ' pwd=' . (!empty($mot_de_passe_raw) ? 'ok' : 'vide') . ' nom=' . $nom . ' prenom=' . $prenom);
         } elseif (strlen($mot_de_passe_raw) < 8) {
             $error = 'Le mot de passe doit contenir au moins 8 caractères.';
         } elseif (!preg_match('/^[\p{L} \-\']+$/u', $nom) || !preg_match('/^[\p{L} \-\']+$/u', $prenom)) {
