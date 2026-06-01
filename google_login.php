@@ -11,7 +11,7 @@ try {
 }
 
 function verifyGoogleToken(string $token) {
-    $client_id = GOOGLE_CLIENT_ID;
+    $client_id = '989221879491-ldu7ab5ikrsn0v737itkru6ek9m57bbk.apps.googleusercontent.com';
     $url = 'https://oauth2.googleapis.com/tokeninfo?id_token=' . rawurlencode($token);
     $response = @file_get_contents($url);
     if ($response === false) {
