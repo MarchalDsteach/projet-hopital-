@@ -206,9 +206,28 @@ if ($conn instanceof mysqli) {
 
         window.onclick = function(event) {
             const modal = document.getElementById('registerModal');
+            // Fermer le modal SEULEMENT si on clique sur le fond du modal (pas sur le contenu)
             if (event.target == modal) {
                 modal.style.display = 'none';
             }
+        }
+
+        // Debug pour vérifier la soumission du formulaire
+        const registerForm = document.getElementById('register');
+        console.log('Formulaire register trouvé?', !!registerForm);
+        
+        if (registerForm) {
+            registerForm.addEventListener('submit', function(e) {
+                console.log('Formulaire register soumis');
+                console.log('Données:', {
+                    nom: document.getElementById('nom').value,
+                    prenom: document.getElementById('prenom').value,
+                    email: document.getElementById('email_reg').value,
+                    motdepasse: document.getElementById('password_reg').value
+                });
+            });
+        } else {
+            console.error('Formulaire register NON TROUVÉ');
         }
 
         function handleGoogleSignIn(response) {
