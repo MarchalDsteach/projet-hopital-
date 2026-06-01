@@ -60,6 +60,16 @@
         <p>Chirurgie de la cataracte, glaucome et consultations spécialisées.</p>
         <a href="patient.php" class="link">Prendre RDV →</a>
       </article>
+      <article class="card" id="chirurgie">
+        <h3>🩺 Chirurgie</h3>
+        <p>Chirurgie générale et spécialisée, blocs opératoires hautement sécurisés et parcours chirurgical optimisé.</p>
+        <a href="patient.php" class="link">Prendre RDV →</a>
+      </article>
+      <article class="card" id="maternite">
+        <h3>🤰 Maternité</h3>
+        <p>Maternité niveau III, suivi périnatal personnalisé et équipe néonatale dédiée pour accueillir chaque naissance.</p>
+        <a href="patient.php" class="link">Prendre RDV →</a>
+      </article>
     </div>
 
     <div class="more-specialties">

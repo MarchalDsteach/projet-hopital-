@@ -210,6 +210,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['search_slot'])) {
     </div>
   </section>
 
+  <section class="hospital-overview">
+    <h2>Hôpital &amp; parcours</h2>
+    <p class="subtitle">Découvrez nos engagements, notre recherche, notre enseignement et notre actualité institutionnelle.</p>
+    <div class="cards">
+      <article class="card" id="presentation">
+        <h3>Présentation</h3>
+        <p>Hôpital Medicare propose une prise en charge complète, de la consultation à l'hospitalisation, avec une équipe pluridisciplinaire engagée.</p>
+      </article>
+      <article class="card" id="recherche-clinique">
+        <h3>Recherche clinique</h3>
+        <p>Nos services participent à des essais cliniques et à des programmes de recherche pour accélérer l'accès aux innovations médicales.</p>
+      </article>
+      <article class="card" id="enseignement">
+        <h3>Enseignement</h3>
+        <p>Nous formons des étudiants et des professionnels de santé par des stages, des formations continues et des parcours de spécialisation.</p>
+      </article>
+      <article class="card" id="recrutement">
+        <h3>Recrutement</h3>
+        <p>Rejoignez une équipe motivée autour de métiers médicaux, paramédicaux et administratifs pour contribuer à l'excellence de nos soins.</p>
+      </article>
+      <article class="card" id="presse">
+        <h3>Presse</h3>
+        <p>Retrouvez nos communiqués et nos actualités institutionnelles pour suivre les grands projets et les événements de l'hôpital.</p>
+      </article>
+    </div>
+  </section>
+
   <section class="espace-patient" id="espace-patient">
     <h2>Votre espace patient en ligne</h2>
     <p>
@@ -222,6 +249,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['search_slot'])) {
       <li>Messagerie sécurisée avec vos praticiens</li>
       <li>Facturation et remboursements</li>
     </ul>
+    <div id="droits-patients" class="patient-rights">
+      <h3>Droits des patients</h3>
+      <p>Vous êtes informé de vos droits : confidentialité, accès aux dossiers, qualité de prise en charge et choix libres des options thérapeutiques.</p>
+    </div>
     <a href="patient.php" class="btn primary">Créer mon espace patient</a>
 
     <div class="espace-grid">
@@ -258,7 +289,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['search_slot'])) {
           <li><a href="patient.php">Prendre RDV</a></li>
           <li><a href="patient.php">Espace patient</a></li>
           <li><a href="#espace-patient">Préparer mon séjour</a></li>
-          <li><a href="#news">Droits des patients</a></li>
+          <li><a href="#droits-patients">Droits des patients</a></li>
           <li><a href="#contacts">Contacts et accès</a></li>
         </ul>
       </div>
@@ -267,19 +298,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['search_slot'])) {
         <ul>
           <li><a href="#rdv">Urgences</a></li>
           <li><a href="specialties.php">Spécialités médicales</a></li>
-          <li><a href="specialties.php">Chirurgie</a></li>
-          <li><a href="specialties.php">Maternité</a></li>
+          <li><a href="specialties.php#chirurgie">Chirurgie</a></li>
+          <li><a href="specialties.php#maternite">Maternité</a></li>
           <li><a href="login.php">Consultations externes</a></li>
         </ul>
       </div>
       <div class="footer-block">
         <h4>Hôpital</h4>
         <ul>
-          <li><a href="#news">Présentation</a></li>
-          <li><a href="#news">Recherche clinique</a></li>
-          <li><a href="#news">Enseignement</a></li>
-          <li><a href="#news">Recrutement</a></li>
-          <li><a href="#news">Presse</a></li>
+          <li><a href="#presentation">Présentation</a></li>
+          <li><a href="#recherche-clinique">Recherche clinique</a></li>
+          <li><a href="#enseignement">Enseignement</a></li>
+          <li><a href="#recrutement">Recrutement</a></li>
+          <li><a href="#presse">Presse</a></li>
         </ul>
       </div>
     </div>
