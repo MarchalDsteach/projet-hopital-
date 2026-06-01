@@ -103,7 +103,8 @@ if ($result && $result->num_rows > 0) {
     $_SESSION['prenom'] = $user['prenom'];
     session_regenerate_id(true);
 
-    echo json_encode(['success' => true, 'role' => trim(strtolower($user['role']))]);
+    $redirect = $user['role'] === 'admin' ? 'admin.php' : 'patient.php';
+    echo json_encode(['success' => true, 'role' => trim(strtolower($user['role'])), 'redirect' => $redirect]);
     exit();
 }
 
@@ -121,7 +122,8 @@ $_SESSION['nom'] = $nom;
 $_SESSION['prenom'] = $prenom;
 session_regenerate_id(true);
 
-echo json_encode(['success' => true, 'role' => trim(strtolower($role))]);
+$redirect = $role === 'admin' ? 'admin.php' : 'patient.php';
+echo json_encode(['success' => true, 'role' => trim(strtolower($role)), 'redirect' => $redirect]);
 $conn->close();
 exit();
 ?>

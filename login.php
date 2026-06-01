@@ -219,41 +219,16 @@ if ($conn instanceof mysqli) {
             .then(response => response.json())
             .then(data => {
                 console.log('Google login response', data);
-                const role = String(data.role || '').trim().toLowerCase();
                 if (data.success) {
-                    // Redirect based on role
-                    switch (role) {
-                        case 'admin':
-                            window.location.href = 'admin.php';
-                            break;
-                        case 'medecin':
-                            window.location.href = 'medecin.php';
-                            break;
-                        case 'infirmiere':
-                            window.location.href = 'infirmiere.php';
-                            break;
-                        case 'patient':
-                            window.location.href = 'patient.php';
-                            break;
-                        case 'technicien':
-                            window.location.href = 'technicien.php';
-                            break;
-                        case 'utilisateur':
-                            window.location.href = 'utilisateur.php';
-                            break;
-                        case 'comptable':
-                            window.location.href = 'comptable.php';
-                            break;
-                        case 'accueil':
-                            window.location.href = 'accueil.php';
-                            break;
-                        default:
-                            if (role === 'admin') {
-                                window.location.href = 'admin.php';
-                            } else {
-                                window.location.href = 'autre.php';
-                            }
-                            break;
+                    if (data.redirect) {
+                        window.location.href = data.redirect;
+                        return;
+                    }
+                    const role = String(data.role || '').trim().toLowerCase();
+                    if (role === 'admin') {
+                        window.location.href = 'admin.php';
+                    } else {
+                        window.location.href = 'patient.php';
                     }
                 } else {
                     displayGoogleMessage('Erreur de connexion Google: ' + data.message, true);
